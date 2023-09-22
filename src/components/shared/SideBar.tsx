@@ -132,7 +132,7 @@ export default function Sidebar() {
                 </li>
                 <li className="rounded-sm">
                   <Link
-                    href="settings"
+                    href="/"
                     className="flex items-center p-2 space-x-3 rounded-md"
                   >
                     <svg
@@ -159,7 +159,7 @@ export default function Sidebar() {
                 </li>
                 <li className="rounded-sm">
                   <Link
-                    href="/logout"
+                    href="/auth/login"
                     className="flex items-center p-2 space-x-3 rounded-md"
                   >
                     <svg
@@ -329,7 +329,7 @@ export default function Sidebar() {
               </li>
               <li className="rounded-sm">
                 <Link
-                  href="/logout"
+                  href="/auth/login"
                   className="flex items-center p-2 space-x-3 rounded-md"
                 >
                   <svg

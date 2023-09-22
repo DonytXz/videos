@@ -1,27 +1,126 @@
 "use client";
 import Sidebar from "@/components/shared/SideBar";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import VideoColumns from "@/components/video/VideoColumns";
+import VideoResources from "@/components/video/VideoResources";
+import {
+  Timeline,
+  TimelineEffect,
+  TimelineRow,
+} from "@xzdarcy/react-timeline-editor";
+import TimelineEditor from "@/components/video/TimelineEditor";
+import 'antd/dist/reset.css';
+// import { cloneDeep } from "lodash";
 
 export default function Home() {
-  const id = localStorage?.getItem("id");
-  const token = localStorage?.getItem("token");
+  let id: any;
+  let token: any;
+
+  if (typeof window !== "undefined") {
+    id = localStorage?.getItem("id");
+    token = localStorage?.getItem("token");
+  }
   const router = useRouter();
 
-  //   }
+  const videoDataMock = [
+    {
+      time: {
+        start: "0:58",
+        end: "1:25",
+      },
+      columns: {
+        start: "Lorem ipsum dolor sit amet consectetur.",
+        end: "Lorem ipsum dolor sit amet consectetur.",
+      },
+    },
+    {
+      time: {
+        start: "1:55",
+        end: "2:15",
+      },
+      columns: {
+        start: "Lorem ipsum dolor sit amet consectetur.",
+        end: "Lorem ipsum dolor sit amet consectetur.",
+      },
+    },
+    {
+      time: {
+        start: "3:22",
+        end: "3:30",
+      },
+      columns: {
+        start: "Lorem ipsum dolor sit amet consectetur.",
+        end: "Lorem ipsum dolor sit amet consectetur.",
+      },
+    },
+    {
+      time: {
+        start: "5:52",
+        end: "6:00",
+      },
+      columns: {
+        start: "Lorem ipsum dolor sit amet consectetur.",
+        end: "Lorem ipsum dolor sit amet consectetur.",
+      },
+    },
+  ];
+
   useEffect(() => {
     if (!id && !token) router.push("/auth/login");
   }, [id, token]);
 
+  const mockData: TimelineRow[] = [
+    {
+      id: "0",
+      actions: [
+        {
+          id: "action00",
+          start: 0,
+          end: 2,
+          effectId: "effect0",
+        },
+      ],
+    },
+    {
+      id: "1",
+      actions: [
+        {
+          id: "action10",
+          start: 1.5,
+          end: 5,
+          effectId: "effect1",
+        },
+      ],
+    },
+  ];
+  // const defaultEditorData: any = cloneDeep(mockData);
+  // const [data, setData] = useState(defaultEditorData);
+
+  const mockEffect: Record<string, TimelineEffect> = {
+    effect0: {
+      id: "effect0",
+      name: "sadsadsad",
+    },
+    effect1: {
+      id: "effect1",
+      name: "sadsadsa",
+    },
+  };
+
   return (
     <main>
-      <div className="flex bg-gray-600 text-white">
+      <div className="flex bg-gray-800">
         <Sidebar />
         <div className="flex flex-col w-full h-screen">
           <div className="flex h-1/2">
-            <div className="w-1/4 text-center bg-gray-300 mx-2">a</div>
-            <div className="w-1/2 grow text-center bg-gray-300 mx-2">
+            {/* <div className="w-1/4 bg-gray-300 mx-2"> */}
+            <div className="w-1/2 bg-gray-300 mx-2">
+              <VideoColumns videoDataArr={videoDataMock} />
+            </div>
+            {/* <div className="w-1/2 grow bg-gray-300 mx-2"> */}
+            <div className=" grow bg-gray-300 mx-2">
               <iframe
                 className="w-full h-full"
                 // width="560"
@@ -33,9 +132,19 @@ export default function Home() {
                 allowFullScreen
               ></iframe>
             </div>
-            <div className="w-1/4 text-center bg-gray-300 mx-2">c</div>
+            {/* <div className="w-1/4 bg-gray-300 mx-2">
+              <VideoResources />
+            </div> */}
           </div>
-          <div className="box-border h-1/2 text-center bg-gray-300 m-2">d</div>
+          <div className="box-border  h-1/2 bg-gray-300 m-2">
+            {/* <Timeline editorData={[]} effects={{}} /> */}
+            {/* <Timeline
+              onChange={setData}
+              editorData={data}
+              effects={mockEffect}
+            /> */}
+            <TimelineEditor />
+          </div>
         </div>
       </div>
     </main>

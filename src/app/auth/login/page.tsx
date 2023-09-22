@@ -19,8 +19,8 @@ const login = () => {
     console.log(response, "response login");
     if (response) {
       localStorage.setItem("token", response?.data?.token);
-      localStorage.setItem("id", response?.data?.id);
-      router.push("/");
+      localStorage.setItem("id", response?.data?._id);
+      router.push("/compaign/register");
       sertIsLoadding(false);
     }
   };
