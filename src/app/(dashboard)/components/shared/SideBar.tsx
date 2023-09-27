@@ -48,7 +48,7 @@ export default function Sidebar() {
               <li className="rounded-sm">
                 <Link
                   href="/"
-                  className="flex items-center p-2 space-x-3 rounded-md"
+                  className="flex items-center p-2 space-x-3 rounded-md pointer-events-none"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -70,7 +70,7 @@ export default function Sidebar() {
               <li className="rounded-sm">
                 <Link
                   href="mail"
-                  className="flex items-center p-2 space-x-3 rounded-md"
+                  className="flex items-center p-2 space-x-3 rounded-md pointer-events-none"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -92,7 +92,7 @@ export default function Sidebar() {
               <li className="rounded-sm">
                 <Link
                   href="/orders"
-                  className="flex items-center p-2 space-x-3 rounded-md"
+                  className="flex items-center p-2 space-x-3 rounded-md pointer-events-none"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -114,7 +114,7 @@ export default function Sidebar() {
               <li className="rounded-sm">
                 <Link
                   href="/"
-                  className="flex items-center p-2 space-x-3 rounded-md"
+                  className="flex items-center p-2 space-x-3 rounded-md pointer-events-none"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
