@@ -5,11 +5,11 @@ import Link from "next/link";
 export default function Sidebar() {
   const [open, setOpen] = useState(false);
   return (
-    <div className="flex-row lg:flex py-8 px-2">
+    <div className="flex-row lg:flex py-8 px-2 bg-medium-purple">
       <div
         className={` ${
           !open ? "lg:w-30" : "lg:w-52 "
-        } flex flex-col lg:h-screen p-3 bg-gray-800 shadow duration-300 w-`}
+        } flex flex-col lg:h-screen p-3 shadow duration-300 w-`}
       >
         {/* <div className="container mx-auto mt-4 lg:mt-12">
         <div className="p-4 mx-2 shadow-sm">

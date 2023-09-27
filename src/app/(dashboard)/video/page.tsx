@@ -104,11 +104,11 @@ const videoMarkers = () => {
     <>
       <div className="flex h-1/2">
         {/* <div className="w-1/4 bg-gray-300 mx-2"> */}
-        <div className="w-1/2 bg-gray-300 mx-2">
+        <div className="w-1/2 mr-2 bg-gray-200">
           <VideoColumns videoDataArr={videoDataMock} />
         </div>
-        {/* <div className="w-1/2 grow bg-gray-300 mx-2"> */}
-        <div className=" grow bg-gray-300 mx-2">
+        {/* <div className="w-1/2 grow mx-2"> */}
+        <div className=" grow mr-2">
           <iframe
             className="w-full h-full"
             // width="560"
@@ -124,7 +124,7 @@ const videoMarkers = () => {
             <VideoResources />
           </div> */}
       </div>
-      <div className="box-border  h-1/2 bg-gray-300 m-2">
+      <div className="box-border  h-1/2  m-2">
         {/* <Timeline editorData={[]} effects={{}} /> */}
         {/* <Timeline
             onChange={setData}
