@@ -4,11 +4,11 @@ import axios from "axios";
 // const ENV = process.env;
 const API = process.env.NEXT_PUBLIC_API_LOGIN;
 
-export const loginService = async (values) => {
+export const loginService = async (values: any) => {
   // console.log(values, "values on atuh login");
   try {
     // const response = await axios.post(`${API}/users/login`, {
-    console.log({API});
+    console.log({ API });
     const response = await axios.post(`${API}/users/login`, {
       username: values.username,
       password: values.password,
