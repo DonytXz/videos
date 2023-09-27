@@ -32,7 +32,7 @@ export default function Home() {
           /*Apply classes for slide in bar*/
           scrollpos = window?.scrollY;
 
-          if (scrollpos > 10) {
+          if (scrollpos > 400) {
             header.classList.add("bg-white");
             navaction.classList.remove("bg-white");
             navaction.classList.add("gradient");
@@ -42,12 +42,14 @@ export default function Home() {
             hamburgerMenu.classList.add("fill-black")
             //Use to switch toggleColour colours
             for (var i = 0; i < toToggle.length; i++) {
-              toToggle[i].classList.add("text-gray-800");
               toToggle[i].classList.remove("text-white");
+              toToggle[i].classList.add("text-gray-800");
             }
             header.classList.add("shadow");
             navcontent.classList.remove("bg-gray-100");
             navcontent.classList.add("bg-white");
+            navcontent.classList.remove("text-white");
+            navcontent.classList.add("text-black");
           } else {
             header.classList.remove("bg-white");
             navaction.classList.remove("gradient");
@@ -58,13 +60,15 @@ export default function Home() {
             hamburgerMenu.classList.add("fill-white")
             //Use to switch toggleColour colours
             for (var i = 0; i < toToggle.length; i++) {
-              toToggle[i].classList.add("text-white");
               toToggle[i].classList.remove("text-gray-800");
+              toToggle[i].classList.add("text-white");
             }
 
             header.classList.remove("shadow");
             navcontent.classList.remove("bg-white");
             navcontent.classList.add("bg-gray-100");
+            navcontent.classList.remove("text-black");
+            navcontent.classList.add("text-white");
           }
         });
       }
@@ -128,14 +132,14 @@ export default function Home() {
             </div>
 
             <div
-              className={`w-full flex-grow lg:flex lg:items-center lg:w-auto mt-2 lg:mt-0 bg-white rounded-lg lg:bg-transparent text-black lg:text-white p-4 lg:p-0 z-20 lg:items-baseline'
+              className={`w-full flex-grow lg:flex lg:items-center lg:w-auto mt-2 lg:mt-0 bg-white rounded-lg lg:bg-transparent text-white  p-4 lg:p-0 z-20 lg:items-baseline'
               ${open ? "" : "hidden"}`}
               id="nav-content"
             >
               <ul className="list-reset lg:flex justify-end flex-1 items-center lg:mb-0">
                 <li className="mr-3 hover:bg-gray-300">
                   <a
-                    className="w-full text-center inline-block py-2 px-4 text-black lg:text-white font-bold no-underline"
+                    className="w-full text-center inline-block py-2 px-4 font-bold no-underline"
                     href="#"
                   >
                     Active
@@ -143,7 +147,7 @@ export default function Home() {
                 </li>
                 <li className="mr-3 hover:bg-gray-300">
                   <a
-                    className="w-full text-center inline-block text-black lg:text-white no-underline hover:text-gray-800 hover:text-underline py-2 px-4"
+                    className="w-full text-center inline-block no-underline hover:text-gray-800 hover:text-underline py-2 px-4"
                     href="#"
                   >
                     link
@@ -151,7 +155,7 @@ export default function Home() {
                 </li>
                 <li className="mr-3 hover:bg-gray-300">
                   <a
-                    className="w-full text-center inline-block text-black lg:text-white no-underline hover:text-gray-800 hover:text-underline py-2 px-4"
+                    className="w-full text-center inline-block no-underline hover:text-gray-800 hover:text-underline py-2 px-4"
                     href="#"
                   >
                     link
