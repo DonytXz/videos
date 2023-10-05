@@ -23,6 +23,8 @@ const config: Config = {
         "medium-green": "#12734F",
         "bright-green": "#0ABF6A",
         "green-blue": "#88B5BF",
+        "dp-blue": "##0E9297",
+        "dp-green": "#A0FFBF",
       },
     },
   },

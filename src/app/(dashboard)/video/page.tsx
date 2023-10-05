@@ -4,11 +4,18 @@ import TimelineEditor from "@/app/(dashboard)/components/video/TimelineEditor";
 import VideoColumns from "@/app/(dashboard)/components/video/VideoColumns";
 import { TimelineEffect, TimelineRow } from "@xzdarcy/react-timeline-editor";
 import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
+// import ReactPlayer from "react-player";
+import dynamic from "next/dynamic";
+import { IconMaximize } from "@tabler/icons-react";
 
-const videoMarkers = () => {
+const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
+
+const videoMarkers = ({ onStart, setOpen }: any) => {
   let id: any;
   let token: any;
+  const [playV, setPlayV]: any = useState(null);
+  // const [open, setOpen] = useState(false);
 
   if (typeof window !== "undefined") {
     id = localStorage?.getItem("id");
@@ -23,8 +30,8 @@ const videoMarkers = () => {
         end: "1:25",
       },
       columns: {
-        start: "Lorem ipsum dolor sit amet consectetur.",
-        end: "Lorem ipsum dolor sit amet consectetur.",
+        start: "Saludo Usuario.",
+        end: "Nombre empresa.",
       },
     },
     {
@@ -33,8 +40,8 @@ const videoMarkers = () => {
         end: "2:15",
       },
       columns: {
-        start: "Lorem ipsum dolor sit amet consectetur.",
-        end: "Lorem ipsum dolor sit amet consectetur.",
+        start: "Nombre de producto.",
+        end: "Nombre de producto.",
       },
     },
     {
@@ -43,8 +50,8 @@ const videoMarkers = () => {
         end: "3:30",
       },
       columns: {
-        start: "Lorem ipsum dolor sit amet consectetur.",
-        end: "Lorem ipsum dolor sit amet consectetur.",
+        start: "Despedida.",
+        end: "Despedida.",
       },
     },
     {
@@ -53,8 +60,8 @@ const videoMarkers = () => {
         end: "6:00",
       },
       columns: {
-        start: "Lorem ipsum dolor sit amet consectetur.",
-        end: "Lorem ipsum dolor sit amet consectetur.",
+        start: "Pagina web.",
+        end: "Pagina web.",
       },
     },
   ];
@@ -100,16 +107,40 @@ const videoMarkers = () => {
       name: "sadsadsa",
     },
   };
+  const timelineState = useRef<any>();
+
+  const onStartVideo = () => {
+    // timelineState.current.play();
+    setPlayV(true);
+  };
+  const onPauseVideo = () => {
+    // timelineState.current.pause();
+    setPlayV(false);
+  };
+  // useEffect(() => {
+  //   // if (!timelineState.current) return;
+  //   //   timelineState.current.pause();
+  //   //   timelineState.current.listener.offAll();
+  //   //   lottieControl.destroy();
+  //   // };
+  //   console.log("adsa", playV)
+  // }, [playV])
+
   return (
     <>
-      <div className="flex h-1/2">
+      <div className="flex h-full">
         {/* <div className="w-1/4 bg-gray-300 mx-2"> */}
-        <div className="w-1/2 mr-2 bg-gray-200">
+
+        {/* <div onClick={() => setOpen(!open)}>
+          <IconMaximize />
+        </div> */}
+        <div className="">
           <VideoColumns videoDataArr={videoDataMock} />
+          {/* <Column /> */}
         </div>
         {/* <div className="w-1/2 grow mx-2"> */}
-        <div className=" grow mr-2">
-          <iframe
+        <div className="grow">
+          {/* <iframe
             className="w-full h-full"
             // width="560"
             // height="315"
@@ -118,20 +149,37 @@ const videoMarkers = () => {
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
-          ></iframe>
+          ></iframe> */}
+          <ReactPlayer
+            // onClick={() => setPlayV(!playV)}
+            // onPause={onPauseVideo}
+            // onStart={onStartVideo}
+            controls={true}
+            onPlay={() => setPlayV(true)}
+            onPause={() => setPlayV(false)}
+            onEnded={() => setPlayV(false)}
+            playing={playV}
+            width="100%"
+            height="100%"
+            url="https://www.youtube.com/watch?v=LXb3EKWsInQ"
+          />
         </div>
         {/* <div className="w-1/4 bg-gray-300 mx-2">
             <VideoResources />
           </div> */}
       </div>
-      <div className="box-border  h-1/2  m-2">
+      <div className="box-border">
         {/* <Timeline editorData={[]} effects={{}} /> */}
         {/* <Timeline
             onChange={setData}
             editorData={data}
             effects={mockEffect}
           /> */}
-        <TimelineEditor />
+        <TimelineEditor
+          timelineState={timelineState}
+          setPlayV={setPlayV}
+          playV={playV}
+        />
       </div>
     </>
   );

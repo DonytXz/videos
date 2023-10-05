@@ -17,9 +17,9 @@ import TimelinePlayer from "./timeLine/player";
 
 const defaultEditorData = cloneDeep(mockData);
 
-const TimelineEditor = () => {
+const TimelineEditor = ({ timelineState, playV, setPlayV }: any) => {
   const [data, setData] = useState(defaultEditorData);
-  const timelineState = useRef<any>();
+  // const timelineState = useRef<any>();
   const playerPanel = useRef<any>();
   const autoScrollWhenPlay = useRef<boolean>(true);
 
@@ -40,6 +40,8 @@ const TimelineEditor = () => {
         ref={playerPanel}
       ></div>
       <TimelinePlayer
+        playV={playV}
+        setPlayV={setPlayV}
         timelineState={timelineState}
         autoScrollWhenPlay={autoScrollWhenPlay}
       />

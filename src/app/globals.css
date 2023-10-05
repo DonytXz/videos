@@ -9,7 +9,11 @@
 } */
 
 
-
+html, body {
+	box-sizing: border-box;
+	/* background: #090526; */
+	background-image: linear-gradient(to bottom, #0E9297 0%, #090526 90%) !important;
+}
 
 
 /* .timeline-editor-engine .player-panel {
@@ -17,13 +21,49 @@
 } */
 .gradient {
 	background: linear-gradient(90deg, #472DA6 0%, #12734F 100%);
+	/* filter: blur(1px); */
 }
 
-.dashboardGradientPurple{
+.timeline-editor-engine .timeline-editor {
+	background: #01010D;
+}
+
+.timeline-editor-engine .timeline-player {
+	/* background: #0E9297 !important; */
+	background-image: linear-gradient(to bottom, #0E9297 0%, #090526 90%) !important;
+}
+
+.dashboardGradientPurple {
 	background-image: linear-gradient(to bottom, #8d15b2 0%, #400452 100%);
 }
 
-.dashboardGradientGreen{
+.gradientPerron {
+	/* filter: blur(1px); */
+	background-image: linear-gradient(to bottom, #0E9297 0%, #3C3C3B 90%) !important;
+	/* opacity: 0.8; */
+	/* backdrop-filter: blur(50px); */
+}
+@supports not (backdrop-filter: blur(10px)) {
+    body > *:not(#element) {
+        filter: blur(10px);
+    }
+}
+
+.bg-blur {
+	background: rgb(1, 1, 13, 0.9) !important;
+	border-radius: 16px;
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	border: 1px solid rgba(1, 1, 13, 0.3);
+}
+
+/* .gradientPerronv2 {
+	background-image: linear-gradient(to bottom, #0E9297 0%, #090526 90%) !important;
+} */
+
+
+.dashboardGradientGreen {
 	background-image: linear-gradient(to bottom, #208323 0%, #023604 100%);
 }
 
