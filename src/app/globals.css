@@ -43,11 +43,11 @@ html, body {
 	/* opacity: 0.8; */
 	/* backdrop-filter: blur(50px); */
 }
-@supports not (backdrop-filter: blur(10px)) {
+/* @supports not (backdrop-filter: blur(10px)) {
     body > *:not(#element) {
         filter: blur(10px);
     }
-}
+} */
 
 .bg-blur {
 	background: rgb(1, 1, 13, 0.9) !important;

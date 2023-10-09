@@ -20,58 +20,58 @@ export default function Home() {
       let toToggle: any;
       let hamburgerMenu:any
 
-      if (typeof window !== "undefined") {
-        scrollpos = window.scrollY;
-        header = document.getElementById("header");
-        navcontent = document.getElementById("nav-content");
-        navaction = document.getElementById("navAction");
-        brandname = document.getElementById("brandname");
-        toToggle = document.querySelectorAll(".toggleColour");
-        hamburgerMenu = document.getElementById("hamburgerMenu");
-        document.addEventListener("scroll", function () {
-          /*Apply classes for slide in bar*/
-          scrollpos = window?.scrollY;
+      // if (typeof window !== "undefined") {
+      //   scrollpos = window.scrollY;
+      //   header = document.getElementById("header");
+      //   navcontent = document.getElementById("nav-content");
+      //   navaction = document.getElementById("navAction");
+      //   brandname = document.getElementById("brandname");
+      //   toToggle = document.querySelectorAll(".toggleColour");
+      //   hamburgerMenu = document.getElementById("hamburgerMenu");
+      //   document.addEventListener("scroll", function () {
+      //     /*Apply classes for slide in bar*/
+      //     scrollpos = window?.scrollY;
 
-          if (scrollpos > 400) {
-            header.classList.add("bg-white");
-            navaction.classList.remove("bg-white");
-            navaction.classList.add("gradient");
-            navaction.classList.remove("text-gray-800");
-            navaction.classList.add("text-white");
-            hamburgerMenu.classList.remove("fill-white")
-            hamburgerMenu.classList.add("fill-black")
-            //Use to switch toggleColour colours
-            for (var i = 0; i < toToggle.length; i++) {
-              toToggle[i].classList.remove("text-white");
-              toToggle[i].classList.add("text-gray-800");
-            }
-            header.classList.add("shadow");
-            navcontent.classList.remove("bg-gray-100");
-            navcontent.classList.add("bg-white");
-            navcontent.classList.remove("text-white");
-            navcontent.classList.add("text-black");
-          } else {
-            header.classList.remove("bg-white");
-            navaction.classList.remove("gradient");
-            navaction.classList.add("bg-white");
-            navaction.classList.remove("text-white");
-            navaction.classList.add("text-gray-800");
-            hamburgerMenu.classList.remove("fill-black")
-            hamburgerMenu.classList.add("fill-white")
-            //Use to switch toggleColour colours
-            for (var i = 0; i < toToggle.length; i++) {
-              toToggle[i].classList.remove("text-gray-800");
-              toToggle[i].classList.add("text-white");
-            }
+      //     if (scrollpos > 400) {
+      //       header.classList.add("bg-white");
+      //       navaction.classList.remove("bg-white");
+      //       navaction.classList.add("gradient");
+      //       navaction.classList.remove("text-gray-800");
+      //       navaction.classList.add("text-white");
+      //       hamburgerMenu.classList.remove("fill-white")
+      //       hamburgerMenu.classList.add("fill-black")
+      //       //Use to switch toggleColour colours
+      //       for (var i = 0; i < toToggle.length; i++) {
+      //         toToggle[i].classList.remove("text-white");
+      //         toToggle[i].classList.add("text-gray-800");
+      //       }
+      //       header.classList.add("shadow");
+      //       navcontent.classList.remove("bg-gray-100");
+      //       navcontent.classList.add("bg-white");
+      //       navcontent.classList.remove("text-white");
+      //       navcontent.classList.add("text-black");
+      //     } else {
+      //       header.classList.remove("bg-white");
+      //       navaction.classList.remove("gradient");
+      //       navaction.classList.add("bg-white");
+      //       navaction.classList.remove("text-white");
+      //       navaction.classList.add("text-gray-800");
+      //       hamburgerMenu.classList.remove("fill-black")
+      //       hamburgerMenu.classList.add("fill-white")
+      //       //Use to switch toggleColour colours
+      //       for (var i = 0; i < toToggle.length; i++) {
+      //         toToggle[i].classList.remove("text-gray-800");
+      //         toToggle[i].classList.add("text-white");
+      //       }
 
-            header.classList.remove("shadow");
-            navcontent.classList.remove("bg-white");
-            navcontent.classList.add("bg-gray-100");
-            navcontent.classList.remove("text-black");
-            navcontent.classList.add("text-white");
-          }
-        });
-      }
+      //       header.classList.remove("shadow");
+      //       navcontent.classList.remove("bg-white");
+      //       navcontent.classList.add("bg-gray-100");
+      //       navcontent.classList.remove("text-black");
+      //       navcontent.classList.add("text-white");
+      //     }
+      //   });
+      // }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });

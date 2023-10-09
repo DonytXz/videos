@@ -15,11 +15,11 @@ const VideoColumns = ({ videoDataArr }: any) => {
         {videoDataArr.map((element: any, index: number) => {
           return (
             <div
-              className={
-                index == 1
-                  ? "border-l-4 border-indigo-600 bg-veryBright-purple text-white"
-                  : "text-gray-300"
-              }
+              className={`rounded-md border border-slate-400 my-2 px-6 py-4
+                ${index == 1
+                  ? "border-white border-l-4  bg-medium-green text-white"
+                  : "text-gray-300"}
+              `}
               key={index}
             >
               <VideoColumn

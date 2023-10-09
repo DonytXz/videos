@@ -7,20 +7,20 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 // import ReactPlayer from "react-player";
 import dynamic from "next/dynamic";
-import { IconMaximize } from "@tabler/icons-react";
+import { IconArrowBigLeftFilled } from "@tabler/icons-react";
 
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
 const videoMarkers = ({ onStart, setOpen }: any) => {
-  let id: any;
-  let token: any;
+  // let id: any;
+  // let token: any;
   const [playV, setPlayV]: any = useState(null);
   // const [open, setOpen] = useState(false);
 
-  if (typeof window !== "undefined") {
-    id = localStorage?.getItem("id");
-    token = localStorage?.getItem("token");
-  }
+  // if (typeof window !== "undefined") {
+  //   id = localStorage?.getItem("id");
+  //   token = localStorage?.getItem("token");
+  // }
   const router = useRouter();
 
   const videoDataMock = [
@@ -66,9 +66,9 @@ const videoMarkers = ({ onStart, setOpen }: any) => {
     },
   ];
 
-  useEffect(() => {
-    if (!id && !token) router.push("/auth/login");
-  }, [id, token]);
+  // useEffect(() => {
+  //   if (!id && !token) router.push("/auth/login");
+  // }, [id, token]);
 
   const mockData: TimelineRow[] = [
     {
@@ -130,14 +130,22 @@ const videoMarkers = ({ onStart, setOpen }: any) => {
     <>
       <div className="flex h-full">
         {/* <div className="w-1/4 bg-gray-300 mx-2"> */}
+        <section className="px-8">
+          <div className="flex flex-col rounded-md border border-slate-400 my-4 px-4 h-[calc(100%-32px)]">
+            <button
+              className="ml-8 mt-8 text-white flex flex-row cursor-pointer"
+              onClick={() => router.push("/campaign/list")}
+            >
+              <IconArrowBigLeftFilled color="white" />
+              <p className="ml-4 font-semibold text-lg">Lista de campañas</p>
+            </button>
+            <div className="">
+              <VideoColumns videoDataArr={videoDataMock} />
+              {/* <Column /> */}
+            </div>
+          </div>
+        </section>
 
-        {/* <div onClick={() => setOpen(!open)}>
-          <IconMaximize />
-        </div> */}
-        <div className="">
-          <VideoColumns videoDataArr={videoDataMock} />
-          {/* <Column /> */}
-        </div>
         {/* <div className="w-1/2 grow mx-2"> */}
         <div className="grow">
           {/* <iframe

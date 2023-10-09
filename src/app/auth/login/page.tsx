@@ -16,11 +16,11 @@ const login = () => {
       username: email,
       password: password,
     });
-    console.log(response, "response login");
+    // console.log(response, "response login");
     if (response) {
-      localStorage.setItem("token", response?.data?.token);
-      localStorage.setItem("id", response?.data?._id);
-      router.push("/compaign/register");
+      // localStorage.setItem("token", response?.data?.token);
+      // localStorage.setItem("id", response?.data?._id);
+      router.push("/campaign/register");
       sertIsLoadding(false);
     }
   };
