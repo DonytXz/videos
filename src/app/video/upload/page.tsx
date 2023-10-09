@@ -19,7 +19,7 @@ const UploadVideo = () => {
     //   localStorage.setItem("id", response?.data?.id);
     //   router.push("/");
     // }
-    router.push("/video");
+    router.push("/campaign/list");
   };
   return (
     <>
