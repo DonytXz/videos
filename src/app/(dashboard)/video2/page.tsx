@@ -1,6 +1,6 @@
 import React from "react";
 
-const page = () => {
+const Video2 = () => {
   return (
     <>
       <div className="flex">
@@ -17,4 +17,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Video2;

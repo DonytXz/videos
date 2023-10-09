@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import DropZoneFile from "@/app/(dashboard)/components/shared/DropZoneFile";
 
-const uploadVideo = () => {
+const UploadVideo = () => {
   const router = useRouter();
   const postData = async (event: any) => {
     // sertIsLoadding(true);
@@ -98,4 +98,4 @@ const uploadVideo = () => {
   );
 };
 
-export default uploadVideo;
+export default UploadVideo;

@@ -1,6 +1,6 @@
 import React from "react";
 
-const register = () => {
+const Register = () => {
   return (
     <>
       <section className="bg-gray-50 dark:bg-gray-900">
@@ -116,4 +116,4 @@ const register = () => {
   );
 };
 
-export default register;
+export default Register;

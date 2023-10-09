@@ -11,7 +11,7 @@ import { IconArrowBigLeftFilled } from "@tabler/icons-react";
 
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
-const videoMarkers = ({ onStart, setOpen }: any) => {
+const Videoo = ({ onStart, setOpen }: any) => {
   // let id: any;
   // let token: any;
   const [playV, setPlayV]: any = useState(null);
@@ -193,4 +193,4 @@ const videoMarkers = ({ onStart, setOpen }: any) => {
   );
 };
 
-export default videoMarkers;
+export default Videoo;

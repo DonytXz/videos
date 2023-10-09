@@ -4,7 +4,7 @@ import Sidebar from "@/app/(dashboard)/components/shared/SideBar";
 import { useRouter } from "next/navigation";
 import React from "react";
 
-const registerCampaing = () => {
+const RegisterCampaing = () => {
   const router = useRouter();
   const postData = async (event: any) => {
     // sertIsLoadding(true);
@@ -134,4 +134,4 @@ const registerCampaing = () => {
   );
 };
 
-export default registerCampaing;
+export default RegisterCampaing;

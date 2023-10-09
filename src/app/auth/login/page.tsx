@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { loginService } from "../../../services/Auth";
 import { useRouter } from "next/navigation";
 
-const login = () => {
+const Login = () => {
   const [email, setEmail] = useState(false);
   const [password, setPassword] = useState(false);
   const [isLoadding, sertIsLoadding] = useState(false);
@@ -12,11 +12,11 @@ const login = () => {
   const postData = async (event: any) => {
     sertIsLoadding(true);
     event.preventDefault();
-    // const response = await loginService({
+    // const response = await LoginService({
     //   username: email,
     //   password: password,
     // });
-    // // console.log(response, "response login");
+    // // console.log(response, "response Login");
     // if (response) {
       // localStorage.setItem("token", response?.data?.token);
       // localStorage.setItem("id", response?.data?._id);
@@ -136,4 +136,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;

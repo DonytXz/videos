@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { IconEyeFilled } from "@tabler/icons-react";
 
-const list = () => {
+const List = () => {
   const router = useRouter();
   return (
     <>
@@ -106,4 +106,4 @@ const list = () => {
   );
 };
 
-export default list;
+export default List;
