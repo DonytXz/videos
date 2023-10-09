@@ -12,17 +12,17 @@ const login = () => {
   const postData = async (event: any) => {
     sertIsLoadding(true);
     event.preventDefault();
-    const response = await loginService({
-      username: email,
-      password: password,
-    });
-    // console.log(response, "response login");
-    if (response) {
+    // const response = await loginService({
+    //   username: email,
+    //   password: password,
+    // });
+    // // console.log(response, "response login");
+    // if (response) {
       // localStorage.setItem("token", response?.data?.token);
       // localStorage.setItem("id", response?.data?._id);
       router.push("/campaign/register");
       sertIsLoadding(false);
-    }
+    // }
   };
 
   return (
