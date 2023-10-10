@@ -30,7 +30,7 @@ const TimelinePlayer: FC<{
       if (autoScrollWhenPlay.current) {
         const autoScrollFrom = 500;
         const left = time * (scaleWidth / scale) + startLeft - autoScrollFrom;
-        timelineState.current.setScrollLeft(left);
+        timelineState?.current?.setScrollLeft(left);
       }
     });
 
@@ -47,9 +47,9 @@ const TimelinePlayer: FC<{
     if (playV != null) handlePlayOrPause2();
     console.log(
       { playV },
-      timelineState.current.isPlaying,
+      timelineState?.current?.isPlaying,
       "isPlaying",
-      timelineState.current.isPaused,
+      timelineState?.current?.isPaused,
       "isPaused"
     );
     // timelineState.current.reRender()

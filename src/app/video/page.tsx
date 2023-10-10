@@ -126,6 +126,28 @@ const VideoMarkers = ({ onStart, setOpen }: any) => {
   //   console.log("adsa", playV)
   // }, [playV])
 
+  const [tab, setTab] = useState(0);
+  const names = [
+    "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque deserunt unde eligendi!",
+    "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum est laborum sapiente nisi amet provident sed, porro ut, alias odit iste cumque molestias vitae perferendis similique natus quisquam. Natus a voluptatum nesciunt. Quos inventore ad hic totam, ipsa fugiat. Magnam.",
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure incidunt dicta quas sunt corporis reprehenderit quia dignissimos error. Quam, iste!",
+  ];
+  const [currenTxt, setCurrentTxt] = useState(names[0]);
+  function setRandomTxt() {
+    const index = Math.floor(Math.random() * names.length);
+    let newName = names[index];
+    if (newName == currenTxt) {
+      setRandomTxt();
+    } else {
+      setCurrentTxt(newName);
+    }
+    return;
+  }
+  useEffect(() => {
+    setTimeout(() => {
+      if (playV) setRandomTxt();
+    }, 9000);
+  }, [currenTxt, playV]);
   return (
     <>
       <div className="flex h-full">
@@ -133,14 +155,52 @@ const VideoMarkers = ({ onStart, setOpen }: any) => {
         <section className="px-8">
           <div className="flex flex-col rounded-md border border-slate-400 my-4 px-4 h-[calc(100%-32px)]">
             <button
-              className="ml-8 mt-8 text-white flex flex-row cursor-pointer"
-              onClick={() => router.push("/campaign/list")}
+              className="ml-8 mt-8 text-white flex flex-row cursor-pointer hover:scale-105"
+              onClick={() => router.push("/campaings")}
             >
               <IconArrowBigLeftFilled color="white" />
               <p className="ml-4 font-semibold text-lg">Lista de campañas</p>
             </button>
-            <div className="">
-              <VideoColumns videoDataArr={videoDataMock} />
+            <div className="flex mt-4">
+              <p
+                onClick={() => setTab(0)}
+                className={`${
+                  tab == 0
+                    ? "bg-white text-black border-gray-600"
+                    : "text-white border-white "
+                } text-left mr-auto p-3 m-2 font-bold text-xl border cursor-pointer hover:scale-105`}
+              >
+                Transcripción
+              </p>
+              <p
+                onClick={() => setTab(1)}
+                className={`${
+                  tab == 1
+                    ? "bg-white text-black border-gray-600"
+                    : "text-white border-white "
+                } tex-left mr-auto p-3 m-2 font-bold text-xl border cursor-pointer hover:scale-105`}
+              >
+                Columnas
+              </p>
+            </div>
+            <div className="flex w-full h-full">
+              {tab == 0 && (
+                <textarea
+                  value={currenTxt}
+                  id="message"
+                  readOnly={true}
+                  rows={currenTxt.length * 0.05}
+                  className="my-auto block p-2.5 w-full text-gray-900 text-2xl bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder={currenTxt}
+                ></textarea>
+              )}
+              {tab == 1 && (
+                <VideoColumns
+                  tab={tab}
+                  setTab={setTab}
+                  videoDataArr={videoDataMock}
+                />
+              )}
               {/* <Column /> */}
             </div>
           </div>

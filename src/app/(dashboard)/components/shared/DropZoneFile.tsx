@@ -6,7 +6,7 @@ const DropZoneFile = ({ theme = "black" }: any) => {
   return (
     <>
       <div
-        className={`border-2 border-black px-4 py-8 my-2 cursor-pointer ${
+        className={`border-2 border-black px-4 py-8 my-2 cursor-pointer hover:scale-105 ${
           theme == "white" ? "text-white border-white" : ""
         }`}
       >

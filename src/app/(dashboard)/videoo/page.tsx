@@ -134,7 +134,7 @@ const Videoo = ({ onStart, setOpen }: any) => {
           <div className="flex flex-col rounded-md border border-slate-400 my-4 px-4 h-[calc(100%-32px)]">
             <button
               className="ml-8 mt-8 text-white flex flex-row cursor-pointer"
-              onClick={() => router.push("/campaign/list")}
+              onClick={() => router.push("/campaings")}
             >
               <IconArrowBigLeftFilled color="white" />
               <p className="ml-4 font-semibold text-lg">Lista de campañas</p>

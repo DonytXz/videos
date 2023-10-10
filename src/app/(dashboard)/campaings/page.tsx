@@ -16,7 +16,7 @@ const List = () => {
           <p className="pt-8 text-2xl font-bold text-white">
             Lista de campañas
           </p>
-          <div className="flex flex-col bg-gray-50 w-full mt-6">
+          <div className="flex flex-col bg-gray-50 w-full mt-6 rounded-lg">
             <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                 <div className="overflow-hidden">
@@ -53,7 +53,7 @@ const List = () => {
                           Presentacion de producto
                         </td>
                         <td className="whitespace-nowrap px-6 py-4">
-                        <button onClick={() => router.push("/video/?id=jbu3490")}>
+                        <button className="hover:scale-105" onClick={() => router.push("/video/?id=jbu3490")}>
                             <IconEyeFilled />
                           </button>
                         </td>
@@ -72,7 +72,7 @@ const List = () => {
                           Presentacion de producto
                         </td>
                         <td className="whitespace-nowrap px-6 py-4">
-                        <button onClick={() => router.push("/video/?id=jbu3478")}>
+                        <button className="hover:scale-105" onClick={() => router.push("/video/?id=jbu3478")}>
                             <IconEyeFilled />
                           </button>
                         </td>
@@ -89,7 +89,7 @@ const List = () => {
                           Presentacion de producto
                         </td>
                         <td className="whitespace-nowrap px-6 py-4">
-                          <button onClick={() => router.push("/video/?id=jbu3470")}>
+                          <button className="hover:scale-105" onClick={() => router.push("/video/?id=jbu3470")}>
                             <IconEyeFilled />
                           </button>
                         </td>
