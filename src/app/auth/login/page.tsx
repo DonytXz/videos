@@ -2,6 +2,11 @@
 import React, { useState } from "react";
 import { loginService } from "../../../services/Auth";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import bg from "../../../../public/img/gradient-login.svg";
+import phone from "../../../../public/img/phone.png";
+import phone2 from "../../../../public/img/phone2.png";
+import guy from "../../../../public/img/guy.png";
 
 const Login = () => {
   const [email, setEmail] = useState(false);
@@ -18,117 +23,87 @@ const Login = () => {
     // });
     // // console.log(response, "response Login");
     // if (response) {
-      // localStorage.setItem("token", response?.data?.token);
-      // localStorage.setItem("id", response?.data?._id);
-      router.push("/wizard/register");
-      sertIsLoadding(false);
+    // localStorage.setItem("token", response?.data?.token);
+    // localStorage.setItem("id", response?.data?._id);
+    router.push("/wizard/register");
+    sertIsLoadding(false);
     // }
   };
 
   return (
     <>
-      <section className="bg-dark-purple dark:bg-dark-purple">
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-          <a
-            href="#"
-            className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
+      <section className="login-gradient min-h-screen flex">
+        <div className="flex w-full h-full my-auto">
+          <div className="flex mx-auto w-1/3">
+            <div className="w-10/12 m-auto flex flex-col">
+              <div className="mx-auto">
+                <Image
+                  src="/img/logo.svg"
+                  alt="Hero"
+                  height={80}
+                  width={246}
+                  priority
+                />
+              </div>
+              <input
+                className="mt-6 bg-transparent border-2 px-4 py-3 border-white rounded-full"
+                type="text"
+                placeholder="Usuario/Correo"
+              />
+              <input
+                className="mt-4 bg-transparent border-2 px-4 py-3 border-white rounded-full"
+                type="text"
+                placeholder="Contraseña"
+              />
+              <button onClick={postData} className="hover:scale-105 mt-6 purpleGradient_btn rounded-full px-2 py-3 text-white">
+                Inglesar
+              </button>
+              <p className="text-white mt-4 text-center font-bold text-base">
+              Si no tienes una cuenta,
+                <span className="text-green-dark cursor-pointer hover:text-green-600"> regístrate aquí.</span>
+              </p>
+            </div>
+          </div>
+          <div
+            style={{
+              backgroundImage: `url(${bg.src})`,
+            }}
+            className="text-white w-2/3 min-h-screen bg-center bg-no-repeat bg-origin-border img-fix"
           >
-            {/* <img
-              className="w-8 h-8 mr-2"
-              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
-              alt="logo"
-            />
-            Flowbite */}
-            Brand Logo
-          </a>
-          <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-            {isLoadding ? (
-              <div className="flex h-full text-white">
-                <div className="m-auto">loadding</div>
-              </div>
-            ) : (
-              <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                  Sign in to your account
-                </h1>
-                <form className="space-y-4 md:space-y-6" action="#">
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      Your email
-                    </label>
-                    <input
-                      onChange={(event: any) => setEmail(event.target.value)}
-                      // type="email"
-                      name="email"
-                      id="email"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder="name@company.com"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="password"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      Password
-                    </label>
-                    <input
-                      onChange={(event: any) => setPassword(event.target.value)}
-                      type="password"
-                      name="password"
-                      id="password"
-                      placeholder="••••••••"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    />
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-start">
-                      <div className="flex items-center h-5">
-                        <input
-                          id="remember"
-                          aria-describedby="remember"
-                          type="checkbox"
-                          className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-                        />
-                      </div>
-                      <div className="ml-3 text-sm">
-                        <label
-                          htmlFor="remember"
-                          className="text-gray-500 dark:text-gray-300"
-                        >
-                          Remember me
-                        </label>
-                      </div>
-                    </div>
-                    <a
-                      href="#"
-                      className="text-sm font-medium text-white hover:underline dark:text-primary-500"
-                    >
-                      Forgot password?
-                    </a>
-                  </div>
-                  <button
-                    // type="submit"
-                    onClick={postData}
-                    className="w-full text-white hover:scale-105 bg-gray-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                  >
-                    Sign in
-                  </button>
-                  <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                    Don’t have an account yet?{" "}
-                    <a
-                      href="#"
-                      className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                    >
-                      Sign up
-                    </a>
+            <div className="flex w-full h-full justify-evenly relative">
+              <div className="flex flex-col items-center w-2/3">
+                <div className="h-2/3 w-full">
+                  <div
+                    className="rounded-b-3xl bg-no-repeat w-10/12 h-full mx-auto max-w-[604px]"
+                    style={{
+                      backgroundImage: `url(${phone.src})`,
+                    }}
+                  ></div>
+                </div>
+                <div className=" w-full h-1/3 flex">
+                  <p className="text-white bg-white/20 backdrop-blur-3xl text-6xl font-normal px-4 py-6 w-10/12 m-auto max-w-[604px]">
+                    Crea videos personalizados con ayuda de la IA
                   </p>
-                </form>
+                </div>
               </div>
-            )}
+              <div className="flex flex-col w-1/3 h-screen min-h-screen pt-8">
+                <div
+                  className="h-1/2 w-full  bg-no-repeat  max-w-[350px] mb-4 rounded-3xl"
+                  style={{
+                    backgroundImage: `url(${phone2.src})`,
+                  }}
+                ></div>
+
+                <div
+                  className="h-1/2 w-full  bg-no-repeat  max-w-[403px] ml-auto mt-4"
+                  style={{
+                    backgroundImage: `url(${guy.src})`,
+                  }}
+                >
+                  <div></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

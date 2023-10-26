@@ -43,6 +43,7 @@ html, body {
 	/* opacity: 0.8; */
 	/* backdrop-filter: blur(50px); */
 }
+
 /* @supports not (backdrop-filter: blur(10px)) {
     body > *:not(#element) {
         filter: blur(10px);
@@ -197,3 +198,32 @@ html, body {
 .timeline-editor-engine .timeline-player .rate-control .ant-select-arrow {
 	color: #ddd;
 }
+
+
+
+
+/* LOGIN */
+.login-gradient {
+	background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 27.69%, rgba(60, 60, 59, 0.2) 101.02%),
+		linear-gradient(0deg, #141414, #141414);
+}
+
+.img-fix{
+	/* background-repeat: no-repeat;
+	background-attachment: fixed; */
+	/* background-position: center center;  */
+	background-size: cover;
+}
+
+.login-gradient-right {
+	background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 27.69%, rgba(60, 60, 59, 0.2) 101.02%),
+		linear-gradient(0deg, #141414, #141414);
+}
+
+.purpleGradient_btn {
+	background: linear-gradient(269.47deg, #380264 -7.34%, #6818A5 100.67%, rgba(104, 24, 165, 0.33) 100.68%);
+}
+
+/* .img-login {
+	background-image: url("/public/img/gradient-login.svg");
+} */
