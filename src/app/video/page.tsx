@@ -66,6 +66,21 @@ const VideoMarkers = ({ onStart, setOpen }: any) => {
     },
   ];
 
+  let mock = [
+    {
+      name: "ID",
+    },
+    {
+      name: "Nombre",
+    },
+    {
+      name: "Correo Electronico",
+    },
+    {
+      name: "Numero Telefonico",
+    },
+  ];
+
   // useEffect(() => {
   //   if (!id && !token) router.push("/auth/login");
   // }, [id, token]);
@@ -150,10 +165,35 @@ const VideoMarkers = ({ onStart, setOpen }: any) => {
   }, [currenTxt, playV]);
   return (
     <>
-      <div className="flex h-full">
+      <div className="flex flex-col lg:flex-row h-full">
         {/* <div className="w-1/4 bg-gray-300 mx-2"> */}
-        <section className="px-8">
-          <div className="flex flex-col rounded-md border border-slate-400 my-4 px-4 h-[calc(100%-32px)]">
+        <section className="px-8 py-8 order-2 lg:order-2">
+          <div className="bg-black p-8 w-full mx-auto  min-w-[350px] h-full">
+            <button
+              className="mx-auto mb-8 text-white flex flex-row cursor-pointer hover:scale-105"
+              onClick={() => router.push("/campaings")}
+            >
+              <IconArrowBigLeftFilled color="white" />
+              <p className="ml-4 font-semibold text-lg">Mis campañas</p>
+            </button>
+            <p className="text-white text-2xl font-medium text-center">
+              Columnas
+            </p>
+            {mock.map((item: any, index: number) => {
+              return (
+                <div key={index}>
+                  {" "}
+                  <div
+                    // onClick={() => router.push("/video")}
+                    className="mx-auto mb-4 max-w-[334px] w-full hover:scale-105 mt-6 purpleGradient_btn rounded-full p-4 text-center text-white text-base font-light"
+                  >
+                    Personaliza tu video
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          {/* <div className="flex flex-col rounded-md border border-slate-400 my-4 px-4 h-[calc(100%-32px)]">
             <button
               className="ml-8 mt-8 text-white flex flex-row cursor-pointer hover:scale-105"
               onClick={() => router.push("/campaings")}
@@ -201,13 +241,13 @@ const VideoMarkers = ({ onStart, setOpen }: any) => {
                   videoDataArr={videoDataMock}
                 />
               )}
-              {/* <Column /> */}
             </div>
-          </div>
+          </div> */}
+          {/* <Column /> */}
         </section>
 
         {/* <div className="w-1/2 grow mx-2"> */}
-        <div className="grow">
+        <div className="grow order-1 lg:order-2 min-h-[250px]">
           {/* <iframe
             className="w-full h-full"
             // width="560"
