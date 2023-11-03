@@ -18,18 +18,18 @@ export default function RootLayout({
 }) {
   return (
     <main>
-      {/* <div className="flex relative w-screen h-screen"> */}
+      <div className="flex relative w-screen h-screen">
         {/* <Sidebar /> */}
-        {/* <div className="flex flex-col w-[calc(100%-48px)] max-w-s max-h-screen mx-6 mt-8 md:mx-8 md:mt-12 lg:mx-12 lg:mt-16 xl:mx-20 xl:mt-20"> */}
+        <div className="flex flex-col w-[calc(100%-48px)] max-w-s max-h-screen mx-6 mt-8 md:mx-8 md:mt-12 lg:mx-12 lg:mt-16 xl:mx-20 xl:mt-20">
           {/* <div className="flex flex-col w-full max-h-screen ml-12 mt-20"> */}
-          {/* <Image
+          <Image
             className="z-50 mx-auto lg:mx-0"
             src="/img/Logo_Deepia_Horizontal_white.svg"
             alt="Hero"
             height={104}
             width={323}
             priority
-          /> */}
+          />
           {/* <p className="text-white bg-red-500 z-50">asdasd</p> */}
 
           {/* <div className="flex w-[calc(100%-48px)] max-w-screen max-h-screen h-full absolute top-0 left-0 pt-20"> */}
@@ -37,8 +37,8 @@ export default function RootLayout({
           {children}
           {/* </div> */}
           {/* </div> */}
-        {/* </div> */}
-      {/* </div> */}
+        </div>
+      </div>
     </main>
   );
 }

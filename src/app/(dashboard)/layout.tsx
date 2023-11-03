@@ -16,11 +16,5 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <main className="w-full h-full min-w-screen min-h-screen">
-      <div className="mx-6 mt-8 md:mx-8 md:mt-12 lg:mx-12 lg:mt-16 xl:mx-20 xl:mt-20">
-        {children}
-      </div>
-    </main>
-  );
+  return <main>{children}</main>;
 }
