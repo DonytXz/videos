@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { loginService } from "../../../services/Auth";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import bg from "../../../../public/img/gradient-login.svg";
+import bg from "../../../../public/img/fondo_login_desktop.svg";
 import phone from "../../../../public/img/phone.png";
 import phone2 from "../../../../public/img/phone2.png";
 import guy from "../../../../public/img/guy.png";
@@ -32,88 +32,68 @@ const Login = () => {
 
   return (
     <>
-      <section className="login-gradient min-h-screen flex">
-        <div className="flex w-full h-full my-auto">
-          <div className="flex mx-auto w-10/12 lg:w-1/3">
-            <div className="w-10/12 m-auto flex flex-col">
-              <div className="mx-auto">
-                <Image
-                  className=""
-                  src="/img/logo.svg"
-                  alt="Hero"
-                  height={80}
-                  width={246}
-                  priority
-                />
-              </div>
-              <input
-                className="mt-6 bg-transparent border-2 px-4 py-3 border-white rounded-full"
-                type="text"
-                placeholder="Usuario/Correo"
-              />
-              <input
-                className="mt-4 bg-transparent border-2 px-4 py-3 border-white rounded-full"
-                type="text"
-                placeholder="Contraseña"
-              />
-              <button
-                onClick={postData}
-                className="hover:scale-105 mt-6 purpleGradient_btn rounded-full px-2 py-3 text-white"
-              >
-                Inglesar
-              </button>
-              <h2 className="text-white mt-4 text-center font-normal text-base">
-                Si no tienes una cuenta,
-                <span className="text-green-dark cursor-pointer hover:text-green-600 font-bold">
-                  regístrate aquí.
-                </span>
-              </h2>
+      <div
+        style={{
+          // backgroundImage: `url(${bg.src}), lightgray -11.817px -0.004px / 106.911% 100.008% no-repeat`,
+          backgroundImage: `url(${bg.src})`,
+          // filter: "gray",
+          // backgroundSize: "cover",
+          // backgroundRepeat: "norepeat",
+          // "lightgray":  "50%",
+          // cover:  "no-repeat"
+          // "mix-blend-mode": "multiply"
+        }}
+        className="flex w-[calc(100%)] max-w-screen max-h-screen h-full absolute top-0 left-0 pt-20 z-0 bg-center bg-no-repeat bg-origin-border img-fix"
+      >
+        <section className="text-white flex  w-full h-full mx-6 md:mx-8 lg:mx-12 xl:mx-20">
+          <div className="my-auto flex flex-col lg:flex-row w-full">
+            <div className="w-full lg:w-1/2 mb-8 lg:mb-0">
+              <p className="lg:text-7xl font-normal text-3xl text-center">
+                Crea videos personalizados con ayuda de la IA
+              </p>
             </div>
-          </div>
-          <div
-            style={{
-              backgroundImage: `url(${bg.src})`,
-            }}
-            className="text-white w-2/3 min-h-screen bg-center bg-no-repeat bg-origin-border img-fix hidden lg:block"
-          >
-            <div className="flex w-full h-full justify-evenly relative">
-              <div className="flex flex-col items-center w-2/3">
-                <div className="h-2/3 w-full relative overflow-hidden bg-cover bg-no-repeat">
-                  <div
-                    className="rounded-b-3xl bg-no-repeat w-10/12 h-full mx-auto max-w-[604px] transition duration-300 ease-in-out hover:scale-110"
-                    style={{
-                      backgroundImage: `url(${phone.src})`,
-                    }}
-                  ></div>
-                </div>
-                <div className=" w-full h-1/3 flex">
-                  <h1 className="text-white bg-white/20 backdrop-blur-3xl text-6xl font-normal px-4 py-6 w-10/12 m-auto max-w-[604px] hover:scale-105">
-                    Crea videos personalizados con ayuda de la IA
-                  </h1>
-                </div>
-              </div>
-              <div className="flex flex-col w-1/3 h-screen min-h-screen pt-8 ">
-                <div className="w-full h-1/2 relative overflow-hidden bg-cover bg-no-repeat mb-4">
-                  <div
-                    className="h-full w-full bg-no-repeat max-w-[350px] rounded-3xl transition duration-300 ease-in-out hover:scale-110"
-                    style={{
-                      backgroundImage: `url(${phone2.src})`,
-                    }}
-                  ></div>
-                </div>
-                <div className="w-full h-1/2 relative overflow-hidden bg-cover bg-no-repeat mt-4">
-                  <div
-                    className="h-full w-full bg-no-repeat max-w-[403px] ml-auto mt-auto transition duration-300 ease-in-out hover:scale-110"
-                    style={{
-                      backgroundImage: `url(${guy.src})`,
-                    }}
-                  ></div>
+            <div className="w-full lg:w-1/2 flex">
+              <div className="bg-transparent-black m-auto px-8 max-w-[788px] w-10/12 py-16 rounded-3xl">
+                <div className="flex flex-col">
+                  <p className="font-normal lg:text-5xl mb-6 text-2xl text-center lg:text-left">
+                    Inicia sesión
+                  </p>
+                  <input
+                    className="bg-transparent border-b-2 border-gray-600 pt-4 pb-2 px-2"
+                    placeholder="Email"
+                    type="text"
+                    name=""
+                    id=""
+                  />
+                  <input
+                    className="bg-transparent border-b-2 border-gray-600 pt-4 pb-2 px-2 mt-2"
+                    placeholder="Contraseña"
+                    type="text"
+                    name=""
+                    id=""
+                  />
+                  <div className="mt-6 flex flex-col lg:flex-row items-center justify-center lg:justify-normal">
+                    <div className="mx-auto lg:mx-0 w-fit mb-6 lg:mb-0">
+                      <button
+                        onClick={postData}
+                        className={`min-w-[120px] max-w-[199px] w-full lg:min-w-[199px] hover:scale-105 purpleGradient_btn p-4 text-white font-medium text-base rounded-3xl`}
+                      >
+                        Ingresar
+                      </button>
+                    </div>
+                    <h2 onClick={() => router.push("/auth/register")} className="text-white my-auto font-normal text-base mx-auto lg:mx-0 lg:ml-auto  text-center lg:text-left">
+                      Si no tienes una cuenta,{" "}
+                      <span className="text-green-dark cursor-pointer hover:text-green-600 font-bold">
+                        regístrate aquí.
+                      </span>
+                    </h2>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </>
   );
 };

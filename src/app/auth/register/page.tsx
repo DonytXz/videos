@@ -1,117 +1,96 @@
+"use client";
+import { useRouter } from "next/navigation";
 import React from "react";
+import bg from "../../../../public/img/crear_cuenta_fondo_desktop.svg";
+import Image from "next/image";
 
 const Register = () => {
+  const router = useRouter();
+  const postData = async (event: any) => {
+    // sertIsLoadding(true);
+    event.preventDefault();
+    // const response = await LoginService({
+    //   username: email,
+    //   password: password,
+    // });
+    // // console.log(response, "response Login");
+    // if (response) {
+    // localStorage.setItem("token", response?.data?.token);
+    // localStorage.setItem("id", response?.data?._id);
+    router.push("/auth/login");
+    // sertIsLoadding(false);
+    // }
+  };
   return (
     <>
-      <section className="bg-gray-50 dark:bg-gray-900">
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-          <a
-            href="#"
-            className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
-          >
-            {/* <img
-              className="w-8 h-8 mr-2"
-              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
-              alt="logo"
-            />
-            Flowbite */}
-            Brand Logo
-          </a>
-          <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-            <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                Create and account
-              </h1>
-              <form className="space-y-4 md:space-y-6" action="#">
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Your email
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="name@company.com"
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="password"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Password
-                  </label>
-                  <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    placeholder="••••••••"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="confirm-password"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Confirm password
-                  </label>
-                  <input
-                    type="confirm-password"
-                    name="confirm-password"
-                    id="confirm-password"
-                    placeholder="••••••••"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  />
-                </div>
-                <div className="flex items-start">
-                  <div className="flex items-center h-5">
-                    <input
-                      id="terms"
-                      aria-describedby="terms"
-                      type="checkbox"
-                      className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-                    />
-                  </div>
-                  <div className="ml-3 text-sm">
-                    <label
-                      htmlFor="terms"
-                      className="font-light text-gray-500 dark:text-gray-300"
-                    >
-                      I accept the{" "}
-                      <a
-                        className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                        href="#"
-                      >
-                        Terms and Conditions
-                      </a>
-                    </label>
-                  </div>
-                </div>
-                <button
-                  type="submit"
-                  className="w-full text-white hover:scale-105 bg-gray-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                >
-                  Create an account
-                </button>
-                <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                  Already have an account?{" "}
-                  <a
-                    href="#"
-                    className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                  >
-                    Login here
-                  </a>
+      <div
+        style={{
+          // backgroundImage: `url(${bg.src}), lightgray -11.817px -0.004px / 106.911% 100.008% no-repeat`,
+          backgroundImage: `url(${bg.src})`,
+          // filter: "gray",
+          // backgroundSize: "cover",
+          // backgroundRepeat: "norepeat",
+          // "lightgray":  "50%",
+          // cover:  "no-repeat"
+          // "mix-blend-mode": "multiply"
+        }}
+        className="flex w-[calc(100%)] max-w-screen max-h-screen h-full absolute top-0 left-0 pt-20 z-0 bg-center bg-no-repeat bg-origin-border img-fix"
+      >
+        <section className="text-white flex  w-full h-full mx-6 md:mx-8 lg:mx-12 xl:mx-20 relative">
+          <div className="my-auto flex flex-col lg:flex-row w-full">
+            <div className="w-full lg:w-1/2 mb-8 lg:mb-0 flex">
+              <div className="w-full lg:w-11/12 mr-auto">
+                <p className="lg:text-7xl font-normal text-3xl text-center lg:text-left lg:mb-6">
+                  Regístrate ahora para empezar a crear
                 </p>
-              </form>
+                <div className="flex flex-col">
+                  <input
+                    className="bg-transparent border-b-2 border-gray-600 pt-4 pb-2 px-2"
+                    placeholder="Email"
+                    type="text"
+                    name=""
+                    id=""
+                  />
+                  <input
+                    className="bg-transparent border-b-2 border-gray-600 pt-4 pb-2 px-2 mt-2"
+                    placeholder="Contraseña"
+                    type="text"
+                    name=""
+                    id=""
+                  />
+                  <input
+                    className="bg-transparent border-b-2 border-gray-600 pt-4 pb-2 px-2 mt-2"
+                    placeholder="Confirmar contraseña"
+                    type="text"
+                    name=""
+                    id=""
+                  />
+                  <div className="mt-6 flex flex-col lg:flex-row items-center justify-center lg:justify-normal">
+                    <div className="mx-auto lg:mx-0 w-fit mb-6 lg:mb-0">
+                      <button
+                        onClick={postData}
+                        className={`min-w-[120px] max-w-[199px] w-full lg:min-w-[199px] hover:scale-105 purpleGradient_btn p-4 text-white font-medium text-base rounded-3xl`}
+                      >
+                        Crear mi cuenta
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="w-full lg:w-1/2 flex max-h-[286px] lg:max-h-[841px]">
+              <Image
+                className="z-50 mx-auto lg:mx-0 lg:absolute top-0 right-0"
+                src="/img/register_form.svg"
+                alt="Hero"
+                height={841}
+                width={788}
+                priority
+              />
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </>
   );
 };
