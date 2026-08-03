@@ -3,10 +3,11 @@
 import { IconArrowLeft, IconCheck, IconPlayerPlayFilled } from "@tabler/icons-react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
-import type ReactPlayerClass from "react-player";
 import { useEffect, useMemo, useRef, useState } from "react";
 
-const VideoPlayer = dynamic(() => import("react-player"), { ssr: false }) as typeof ReactPlayerClass;
+type VideoPlayerComponent = typeof import("react-player")["default"];
+
+const VideoPlayer = dynamic(() => import("react-player"), { ssr: false }) as VideoPlayerComponent;
 
 const VIDEO_DURATION = 5 * 60 + 14;
 
@@ -82,7 +83,7 @@ const formatTime = (seconds: number) => {
 
 export default function VideoPreview() {
   const router = useRouter();
-  const playerRef = useRef<ReactPlayerClass | null>(null);
+  const playerRef = useRef<HTMLVideoElement | null>(null);
   const [prospect, setProspect] = useState(defaultProspect);
   const [currentTime, setCurrentTime] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -122,13 +123,13 @@ export default function VideoPreview() {
 
   const seekToMoment = (moment: TimelineMoment) => {
     const targetTime = moment.id === "finish" ? VIDEO_DURATION - 4 : moment.time;
-    playerRef.current?.seekTo(targetTime, "seconds");
+    if (playerRef.current) playerRef.current.currentTime = targetTime;
     setCurrentTime(targetTime);
     setIsPlaying(true);
   };
 
   const seekToTime = (seconds: number) => {
-    playerRef.current?.seekTo(seconds, "seconds");
+    if (playerRef.current) playerRef.current.currentTime = seconds;
     setCurrentTime(seconds);
   };
 
@@ -167,15 +168,14 @@ export default function VideoPreview() {
               playing={isPlaying}
               width="100%"
               height="100%"
-              url="https://www.youtube.com/watch?v=LXb3EKWsInQ"
-              progressInterval={250}
+              src="https://www.youtube.com/watch?v=LXb3EKWsInQ"
               onPlay={() => setIsPlaying(true)}
               onPause={() => setIsPlaying(false)}
               onEnded={() => {
                 setIsPlaying(false);
                 setCurrentTime(VIDEO_DURATION);
               }}
-              onProgress={({ playedSeconds }) => setCurrentTime(Math.min(playedSeconds, VIDEO_DURATION))}
+              onTimeUpdate={(event) => setCurrentTime(Math.min(event.currentTarget.currentTime, VIDEO_DURATION))}
             />
             {activeMoment && (
               <div className={`video-personalization-overlay moment-${activeMoment.id}`} key={activeMoment.id}>

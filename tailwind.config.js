@@ -1,6 +1,5 @@
-import type { Config } from "tailwindcss";
-
-const config: Config = {
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -17,7 +16,6 @@ const config: Config = {
         "transparent-black": "rgba(21, 21, 21, 0.55)",
         "nice-black": "rgba(21, 21, 21, 0.54)",
         "nice-green": "#43D681",
-
         "primary-black": "#3C3C3B",
         "secondary-black": "rgba(20, 20, 20, 1)",
         "black-light": "rgba(60, 60, 59, 0.22)",
@@ -27,7 +25,6 @@ const config: Config = {
         "green-dark": "#43D681",
         "green-light": "#A0FFBF",
         "bgDrop-gray": "rgba(255, 255, 255)",
-        // "primary-black": "#01010D",
         "dark-purple": "#090526",
         "medium-purple": "#231459",
         "bright-purple": "#472DA6",
@@ -43,4 +40,3 @@ const config: Config = {
   },
   plugins: [],
 };
-export default config;
