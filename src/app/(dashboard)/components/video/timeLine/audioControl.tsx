@@ -1,5 +1,5 @@
 import { Howl } from 'howler';
-import { TimelineEngine } from '@xzdarcy/react-timeline-editor';
+import type { ITimelineEngine } from '@xzdarcy/timeline-engine';
 
 class AudioControl {
   cacheMap: Record<string, Howl> = {};
@@ -11,7 +11,7 @@ class AudioControl {
     }
   > = {};
 
-  start(data: { id: string; engine: TimelineEngine; src: string; startTime: number; time: number }) {
+  start(data: { id: string; engine: ITimelineEngine; src: string; startTime: number; time: number }) {
     const { id, src, startTime, time, engine } = data;
     let item: Howl;
     if (this.cacheMap[id]) {
@@ -43,7 +43,7 @@ class AudioControl {
     this.listenerMap[id].rate = rateListener;
   }
 
-  stop(data: { id: string; engine: TimelineEngine }) {
+  stop(data: { id: string; engine: ITimelineEngine }) {
     const { id, engine } = data;
     if (this.cacheMap[id]) {
       const item = this.cacheMap[id];

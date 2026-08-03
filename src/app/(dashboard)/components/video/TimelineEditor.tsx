@@ -20,7 +20,7 @@ const defaultEditorData = cloneDeep(mockData);
 const TimelineEditor = ({ timelineState, playV, setPlayV }: any) => {
   const [data, setData] = useState(defaultEditorData);
   // const timelineState = useRef<any>();
-  const playerPanel = useRef<any>();
+  const playerPanel = useRef<HTMLDivElement | null>(null);
   const autoScrollWhenPlay = useRef<boolean>(true);
 
   return (

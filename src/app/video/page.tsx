@@ -1,5 +1,5 @@
 "use client";
-import type { TimelineEffect, TimelineRow } from "@xzdarcy/react-timeline-editor";
+import type { TimelineEffect, TimelineRow } from "@xzdarcy/timeline-engine";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 // import ReactPlayer from "react-player";
@@ -123,7 +123,7 @@ const VideoMarkers = ({ onStart, setOpen }: any) => {
       name: "sadsadsa",
     },
   };
-  const timelineState = useRef<any>();
+  const timelineState = useRef<any>(null);
 
   const onStartVideo = () => {
     // timelineState.current.play();

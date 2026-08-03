@@ -40,20 +40,18 @@ const TimelinePlayer: FC<{
       engine.listener.offAll();
       lottieControl.destroy();
     };
-  }, []);
+  }, [autoScrollWhenPlay, timelineState]);
 
   useEffect(() => {
-    const time = timelineState.current.getTime();
-    if (playV != null) handlePlayOrPause2();
-    console.log(
-      { playV },
-      timelineState?.current?.isPlaying,
-      "isPlaying",
-      timelineState?.current?.isPaused,
-      "isPaused"
-    );
-    // timelineState.current.reRender()
-  }, [playV]);
+    const engine = timelineState.current;
+    if (!engine || playV == null) return;
+
+    if (playV) {
+      engine.play({ autoEnd: false });
+    } else {
+      engine.pause();
+    }
+  }, [playV, timelineState]);
 
   // 开始或暂停
   const handlePlayOrPause = () => {
@@ -64,15 +62,6 @@ const TimelinePlayer: FC<{
     } else {
       timelineState.current.play({ autoEnd: false });
       setPlayV(true);
-    }
-  };
-
-  const handlePlayOrPause2 = () => {
-    if (!timelineState.current) return;
-    if (!playV) {
-      timelineState.current.pause();
-    } else {
-      timelineState.current.play({ autoEnd: false });
     }
   };
 
