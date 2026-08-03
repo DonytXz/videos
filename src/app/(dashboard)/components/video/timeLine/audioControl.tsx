@@ -57,4 +57,6 @@ class AudioControl {
   }
 }
 
-export default new AudioControl();
+const audioControl = new AudioControl();
+
+export default audioControl;

@@ -1,6 +1,5 @@
 import type { TimelineAction, TimelineEffect, TimelineRow } from '@xzdarcy/timeline-engine';
-import audioControl from './audioControl';
-import lottieControl from './lottieControl';
+import { withBasePath } from '@/lib/basePath';
 
 export const scaleWidth = 160;
 export const scale = 5;
@@ -21,46 +20,10 @@ export const mockEffect: Record<string, TimelineEffect> = {
   effect0: {
     id: 'effect0',
     name: 'nombre empresa',
-    source: {
-      start: ({ action, engine, isPlaying, time }) => {
-        if (isPlaying) {
-          const src = (action as CustomTimelineAction).data.src;
-          audioControl.start({ id: src, src, startTime: action.start, engine, time });
-        }
-      },
-      enter: ({ action, engine, isPlaying, time }) => {
-        if (isPlaying) {
-          const src = (action as CustomTimelineAction).data.src;
-          audioControl.start({ id: src, src, startTime: action.start, engine, time });
-        }
-      },
-      leave: ({ action, engine }) => {
-        const src = (action as CustomTimelineAction).data.src;
-        audioControl.stop({ id: src, engine });
-      },
-      stop: ({ action, engine }) => {
-        const src = (action as CustomTimelineAction).data.src;
-        audioControl.stop({ id: src, engine });
-      },
-    },
   },
   effect1: {
     id: 'effect1',
     name: 'nombre producto',
-    source: {
-      enter: ({ action, time }) => {
-        const src = (action as CustomTimelineAction).data.src;
-        lottieControl.enter({ id: src, src, startTime: action.start, endTime: action.end, time });
-      },
-      update: ({ action, time }) => {
-        const src = (action as CustomTimelineAction).data.src;
-        lottieControl.update({ id: src, src, startTime: action.start, endTime: action.end, time });
-      },
-      leave: ({ action, time }) => {
-        const src = (action as CustomTimelineAction).data.src;
-        lottieControl.leave({ id: src, startTime: action.start, endTime: action.end, time });
-      },
-    },
   },
 };
 
@@ -74,7 +37,7 @@ export const mockData: CusTomTimelineRow[] = [
         end: 16,
         effectId: 'effect1',
         data: {
-          src: '/lottie/lottie1/data.json',
+          src: withBasePath('/lottie/lottie1/data.json'),
           name: 'asdasd',
         },
       },
@@ -89,7 +52,7 @@ export const mockData: CusTomTimelineRow[] = [
         end: 9.5,
         effectId: 'effect1',
         data: {
-          src: '/lottie/lottie2/data.json',
+          src: withBasePath('/lottie/lottie2/data.json'),
           name: 'asdasdsad',
         },
       },
@@ -104,7 +67,7 @@ export const mockData: CusTomTimelineRow[] = [
         end: 5,
         effectId: 'effect1',
         data: {
-          src: '/lottie/lottie3/data.json',
+          src: withBasePath('/lottie/lottie3/data.json'),
           name: 'dsadasd',
         },
       },
@@ -119,7 +82,7 @@ export const mockData: CusTomTimelineRow[] = [
         end: 20,
         effectId: 'effect0',
         data: {
-          src: '/audio/bg.mp3',
+          src: withBasePath('/audio/bg.mp3'),
           name: 'asdsadsadsa',
         },
       },

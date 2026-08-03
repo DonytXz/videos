@@ -8,6 +8,7 @@ import { IconNotebook } from "@tabler/icons-react";
 import { IconHelp } from "@tabler/icons-react";
 import { IconRocket } from "@tabler/icons-react";
 import { IconMenu2 } from "@tabler/icons-react";
+import { withBasePath } from "@/lib/basePath";
 
 export default function Sidebar() {
   // const [open, setOpen] = useState(false);
@@ -43,7 +44,7 @@ export default function Sidebar() {
           </button>
           {/* <div className={` ${expanded ? "block" : "hidden"} `}>
             <Image
-              src="/robot.png"
+              src={withBasePath("/robot.png")}
               alt="Hero"
               height={85}
               width={85}
@@ -58,7 +59,7 @@ export default function Sidebar() {
           )}
           <div className={` ${expanded ? "block" : "hidden"}`}>
             <Image
-              src="/robot.png"
+              src={withBasePath("/robot.png")}
               alt="Hero"
               height={85}
               width={85}

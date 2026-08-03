@@ -7,6 +7,7 @@ const API = process.env.NEXT_PUBLIC_API_LOGIN;
 export const loginService = async (values: any) => {
   // console.log(values, "values on atuh login");
   try {
+    if (!API) return undefined;
     // const response = await axios.post(`${API}/users/login`, {
     console.log({ API });
     const response = await axios.post(`${API}/users/login`, {

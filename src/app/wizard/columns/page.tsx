@@ -3,21 +3,26 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import bg from "../../../../public/img/elegir_columnas_fondo_desktop.svg";
 import Image from "next/image";
+import { withBasePath } from "@/lib/basePath";
 
 const Columns = () => {
   const router = useRouter();
   let mock = [
     {
-      name: "ID",
+      name: "Perfil",
+      example: "Editor de Naturaleza",
     },
     {
-      name: "Nombre",
+      name: "Canal",
+      example: "Fauna Viva",
     },
     {
-      name: "Correo Electronico",
+      name: "Correo electrónico",
+      example: "editor@faunaviva.demo",
     },
     {
-      name: "Numero Telefonico",
+      name: "Tema",
+      example: "Especial Reptiles",
     },
   ];
   return (
@@ -41,9 +46,9 @@ const Columns = () => {
               Columnas encontradas
             </h1>
             <h2 className="text-white mt-4 text-3xl font-light text-center">
-              Selecciona{" "}
+              Asigna{" "}
               {/* <span className="text-white cursor-pointer font-bold text-3xl"> */}
-              2 para personalizar el video y 2 para contacto.
+              3 columnas al mensaje y 1 como dato de contacto.
               {/* </span> */}
             </h2>
             <div className="flex flex-col mt-10">
@@ -63,7 +68,7 @@ const Columns = () => {
                         <div className="upload__buttonInc flex w-12 h-12 rounded-full mr-0 lg:mr-4">
                           <Image
                             className="z-50 m-auto"
-                            src="/img/icon/database.svg"
+                            src={withBasePath("/img/icon/database.svg")}
                             alt="Hero"
                             height={16}
                             width={15}
@@ -74,9 +79,7 @@ const Columns = () => {
                           <p className="text-white text-3xl mt-2 lg:mt-0 font-medium text-center lg:text-left">
                             {item.name}
                           </p>
-                          <p className="text-white font-light mt-2 lg:mt-0 text-2xl text-center lg:text-left">{`Columna ${
-                            index + 1
-                          }`}</p>
+                          <p className="text-white/60 font-light mt-2 lg:mt-0 text-lg text-center lg:text-left">Ejemplo: {item.example}</p>
                         </div>
                       </div>
                     </div>
@@ -86,7 +89,7 @@ const Columns = () => {
                       </p>
                       <button
                         className={`${
-                          index == 2 || index == 3
+                          index == 2
                             ? "opacity-30 cursor-default hover:scale-100"
                             : ""
                         } max-w-[166px] mt-2 lg:mt-0 mr-0 lg:mr-4 w-full hover:scale-105 purpleGradient_btn rounded-full px-4 py-2 text-white text-lg font-bold`}
@@ -95,7 +98,7 @@ const Columns = () => {
                       </button>
                       <button
                         className={`${
-                          index == 0 || index == 1
+                          index !== 2
                             ? "opacity-30 cursor-default hover:scale-100"
                             : ""
                         } min-w-[120px] max-w-[166px] mt-2 lg:mt-0 w-full hover:scale-105 purpleGradient_btn rounded-full px-4 py-2 text-white font-bold text-base`}
@@ -110,7 +113,7 @@ const Columns = () => {
                 onClick={() => router.push("/video")}
                 className="mx-auto mb-8 max-w-[336px] w-full hover:scale-105 mt-6 purpleGradient_btn rounded-full px-2 py-3 text-white text-lg font-bold"
               >
-                Personaliza tu video
+                Crear vista previa del video →
               </button>
             </div>
           </div>

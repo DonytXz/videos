@@ -66,4 +66,6 @@ class LottieControl {
   }
 }
 
-export default new LottieControl();
+const lottieControl = new LottieControl();
+
+export default lottieControl;

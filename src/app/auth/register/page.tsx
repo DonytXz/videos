@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import bg from "../../../../public/img/crear_cuenta_fondo_desktop.svg";
 import Image from "next/image";
+import { withBasePath } from "@/lib/basePath";
 
 const Register = () => {
   const router = useRouter();
@@ -81,7 +82,7 @@ const Register = () => {
             <div className="w-full lg:w-1/2 flex max-h-[286px] lg:max-h-[841px]">
               <Image
                 className="z-50 mx-auto lg:mx-0 lg:absolute top-0 right-0"
-                src="/img/register_form.svg"
+                src={withBasePath("/img/register_form.svg")}
                 alt="Hero"
                 height={841}
                 width={788}

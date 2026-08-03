@@ -1,5 +1,6 @@
 import "@/app/globals.css";
 import type { Metadata } from "next";
+import { withBasePath } from "@/lib/basePath";
 // import Sidebar from "./components/shared/SideBar";
 
 export const metadata: Metadata = {
@@ -20,7 +21,7 @@ export default function RootLayout({
           {/* <div className="flex flex-col w-full max-h-screen ml-12 mt-20"> */}
           {/* <Image
             className="z-50 mx-auto lg:mx-0"
-            src="/img/Logo_Deepia_Horizontal_white.svg"
+            src={withBasePath("/img/Logo_Deepia_Horizontal_white.svg")}
             alt="Hero"
             height={104}
             width={323}
