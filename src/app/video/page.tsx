@@ -1,8 +1,5 @@
 "use client";
-import Sidebar from "@/app/(dashboard)/components/shared/SideBar";
-import TimelineEditor from "@/app/(dashboard)/components/video/TimelineEditor";
-import VideoColumns from "@/app/(dashboard)/components/video/VideoColumns";
-import { TimelineEffect, TimelineRow } from "@xzdarcy/react-timeline-editor";
+import type { TimelineEffect, TimelineRow } from "@xzdarcy/react-timeline-editor";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 // import ReactPlayer from "react-player";
@@ -10,6 +7,10 @@ import dynamic from "next/dynamic";
 import { IconArrowBigLeftFilled } from "@tabler/icons-react";
 
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
+const TimelineEditor = dynamic(
+  () => import("@/app/(dashboard)/components/video/TimelineEditor"),
+  { ssr: false },
+);
 
 const VideoMarkers = ({ onStart, setOpen }: any) => {
   // let id: any;
