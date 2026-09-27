@@ -1,113 +1,222 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useMemo, useState } from "react";
-import { useDropzone } from "react-dropzone";
+import { useSearchParams } from "next/navigation";
+import { Suspense, useRef, useState, type ChangeEvent } from "react";
+import FunnelNav from "../../components/property-demo/FunnelNav";
+import {
+  saveCampaign,
+  useCampaign,
+} from "../../components/property-demo/useCampaign";
+import {
+  csvColumns,
+  defaultCampaign,
+  MAX_FILE_BYTES,
+  MAX_ROWS,
+  parseBuyersCsv,
+} from "@/lib/property-demo";
 import { withBasePath } from "@/lib/basePath";
 
-const exampleRows = [
-  { perfil: "Editor de Naturaleza", canal: "Fauna Viva", correo: "editor@faunaviva.demo", tema: "Especial Reptiles" },
-  { perfil: "Productor de Campo", canal: "Mundo Salvaje", correo: "produccion@mundosalvaje.demo", tema: "Grandes Depredadores" },
-  { perfil: "Curadora de Fauna", canal: "Archivo Animal", correo: "curaduria@archivoanimal.demo", tema: "Vida Silvestre" },
-  { perfil: "Narrador Documental", canal: "Planeta Vivo", correo: "narracion@planetavivo.demo", tema: "Ecosistemas" },
-];
+function CampaignData() {
+  const campaign = useCampaign();
+  const params = useSearchParams();
+  const uploadFirst = params.get("source") === "upload";
+  const [error, setError] = useState("");
+  const [reading, setReading] = useState(false);
+  const fileInput = useRef<HTMLInputElement>(null);
 
-function UploadCSVContent() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const isShowcase = searchParams.get("mode") === "showcase";
-  const [source, setSource] = useState<"example" | "upload" | null>(null);
-  const [isProcessing, setIsProcessing] = useState(false);
-
-  const loadSource = (nextSource: "example" | "upload") => {
-    setIsProcessing(true);
-    window.setTimeout(() => {
-      setSource(nextSource);
-      setIsProcessing(false);
-      sessionStorage.setItem("deepia-showcase", JSON.stringify({ source: nextSource, rows: exampleRows }));
-    }, 650);
-  };
-
-  const { getRootProps, getInputProps, open, acceptedFiles, isDragActive } = useDropzone({
-    disabled: isShowcase,
-    noClick: true,
-    noKeyboard: true,
-    accept: { "text/csv": [".csv"] },
-    multiple: false,
-    onDropAccepted: () => loadSource("upload"),
-  });
-
-  const uploadedName = useMemo(() => acceptedFiles[0]?.name, [acceptedFiles]);
+  async function readFile(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    setError("");
+    if (
+      !file.name.toLowerCase().endsWith(".csv") ||
+      file.size > MAX_FILE_BYTES
+    ) {
+      setError("Elige un archivo .csv de hasta 1 MB.");
+      event.target.value = "";
+      return;
+    }
+    setReading(true);
+    try {
+      const rows = parseBuyersCsv(await file.text());
+      saveCampaign({
+        source: "upload",
+        fileName: file.name,
+        rows,
+        selected: 0,
+      });
+    } catch (issue) {
+      setError(
+        issue instanceof Error
+          ? issue.message
+          : "No pudimos leer el archivo. Inténtalo con la plantilla.",
+      );
+    } finally {
+      setReading(false);
+      if (fileInput.current) fileInput.current.value = "";
+    }
+  }
 
   return (
-    <main className="wizard-showcase-shell">
-      <nav className="wizard-showcase-nav">
-        <Link href="/" className="flex items-center gap-3">
-          <Image src={withBasePath("/img/logo-min.svg")} alt="" width={34} height={34} />
-          <span>Deepia</span>
-        </Link>
-        <div className="wizard-progress"><strong>1</strong><span /><i>2</i><span /><i>3</i></div>
-        <p>Paso 1 de 3 · Datos</p>
-      </nav>
-
-      <section className="wizard-showcase-content">
-        <div className="wizard-showcase-heading">
-          <p className="landing-eyebrow">Prepara tu personalización</p>
-          <h1>¿Con qué datos quieres crear tus videos?</h1>
-          <p>Sube tu archivo o usa nuestro ejemplo para recorrer el flujo completo sin preparar nada.</p>
+    <main className="tour-shell">
+      <FunnelNav step={2} />
+      <section className="tour-container tour-page-heading">
+        <div>
+          <p className="tour-eyebrow">02 / DESCUBRE LOS DATOS</p>
+          <h1>
+            {uploadFirst ? (
+              <>
+                Tu lista de compradores.
+                <br />
+                <em>Tu siguiente campaña.</em>
+              </>
+            ) : (
+              <>
+                Cada fila.
+                <br />
+                <em>Un recorrido personal.</em>
+              </>
+            )}
+          </h1>
         </div>
-
-        <div className="wizard-source-grid">
-          <div {...getRootProps()} className={`wizard-source-card ${isDragActive ? "is-dragging" : ""} ${isShowcase ? "is-disabled" : ""}`} aria-disabled={isShowcase}>
-            {isShowcase && <div className="wizard-disabled-tag">Desactivado en la demo</div>}
-            <input {...getInputProps()} />
-            <div className="wizard-source-icon"><Image src={withBasePath("/img/icon/upload.svg")} alt="" width={28} height={28} /></div>
-            <p className="wizard-source-label">Tus datos</p>
-            <h2>Sube un archivo CSV</h2>
-            <p>Una fila por versión. Recomendamos incluir perfil, canal, correo y tema editorial.</p>
-            <button type="button" onClick={open} disabled={isShowcase} className="landing-button landing-button-secondary">
-              {isShowcase ? "Disponible al iniciar sesión" : "Elegir archivo"}
-            </button>
-            <small>Máximo 10 MB · Solo archivos .csv</small>
+        <p>
+          {uploadFirst
+            ? "Carga tu CSV para probar los mensajes con tus propiedades. Puedes descargar la plantilla para empezar."
+            : "Estos son los datos detrás del recorrido. Tus cambios ya están aquí; no tienes que volver a capturarlos."}
+        </p>
+      </section>
+      <section className="tour-container tour-data-content">
+        <div className="tour-upload-bar">
+          <div>
+            <h2>
+              {uploadFirst
+                ? "Carga los datos de tu campaña"
+                : "¿Quieres probar con tus propiedades?"}
+            </h2>
+            <p>
+              CSV · Hasta 1 MB · {MAX_ROWS} compradores · Se procesa en este
+              navegador
+            </p>
           </div>
-
-          <div className="wizard-source-card wizard-source-example">
-            <div className="wizard-example-tag">Recomendado para explorar</div>
-            <div className="wizard-source-icon">✦</div>
-            <p className="wizard-source-label">Demo guiada</p>
-            <h2>Usa nuestra base de ejemplo</h2>
-            <p>Cuatro prospectos ficticios con todo lo necesario para ver una personalización completa.</p>
-            <button type="button" onClick={() => loadSource("example")} className="landing-button">
-              Cargar CSV de ejemplo
-            </button>
-            <a href={withBasePath("/examples/deepia-prospectos-demo.csv")} download className="wizard-download">Descargar y revisar el CSV</a>
+          <div className="tour-actions">
+            <a
+              className="tour-text-link"
+              href={withBasePath("/examples/deepia-propiedades-demo.csv")}
+              download
+            >
+              Descargar plantilla ↓
+            </a>
+            <label className="tour-button tour-upload-label">
+              {reading ? "Leyendo archivo…" : "Elegir mi CSV"}
+              <input
+                ref={fileInput}
+                type="file"
+                accept=".csv,text/csv"
+                aria-label="Elegir mi CSV"
+                disabled={reading}
+                onChange={readFile}
+              />
+            </label>
           </div>
         </div>
-
-        {isProcessing && <div className="wizard-processing"><i /><span>Detectando columnas y preparando la vista previa…</span></div>}
-
-        {source && !isProcessing && (
-          <section className="wizard-data-preview" aria-live="polite">
-            <div className="wizard-preview-title">
-              <div><i /><span><strong>{source === "example" ? "deepia-prospectos-demo.csv" : uploadedName}</strong><small>4 filas · 4 columnas detectadas</small></span></div>
-              <button type="button" onClick={() => setSource(null)}>Cambiar archivo</button>
-            </div>
-            <div className="wizard-table-wrap">
-              <table>
-                <thead><tr><th>Perfil</th><th>Canal</th><th>Correo</th><th>Tema</th></tr></thead>
-                <tbody>{exampleRows.slice(0, 3).map((row) => <tr key={row.correo}><td>{row.perfil}</td><td>{row.canal}</td><td>{row.correo}</td><td>{row.tema}</td></tr>)}</tbody>
-              </table>
-            </div>
-            <div className="wizard-preview-actions">
-              <p><span>✓</span> Los datos están listos. Podrás elegir cómo usar cada columna en el siguiente paso.</p>
-              <button type="button" onClick={() => router.push("/wizard/columns")} className="landing-button">
-                Continuar con estas columnas →
-              </button>
-            </div>
-          </section>
+        <p className="tour-small tour-muted tour-upload-note">
+          La plantilla incluye: nombre, correo, propiedad, zona, recamaras e
+          interes. Usaremos ilustraciones de ejemplo para previsualizar los
+          mensajes.
+        </p>
+        {error && (
+          <p className="tour-error" role="alert">
+            {error} Tu campaña anterior sigue disponible abajo.
+          </p>
         )}
+        <section
+          className="tour-table-panel"
+          aria-label="Datos de la campaña"
+          aria-busy={reading}
+        >
+          <div className="tour-table-heading">
+            <div>
+              <p className="tour-eyebrow">
+                {campaign.source === "example"
+                  ? "CAMPAÑA DE EJEMPLO · DATOS FICTICIOS"
+                  : "TU CAMPAÑA · VISTA PREVIA LOCAL"}
+              </p>
+              <h2>{campaign.fileName}</h2>
+              <p aria-live="polite">
+                {campaign.rows.length}{" "}
+                {campaign.rows.length === 1 ? "comprador" : "compradores"} ·{" "}
+                {csvColumns.length} columnas · Fila seleccionada:{" "}
+                {campaign.selected + 1}
+              </p>
+            </div>
+            <button
+              type="button"
+              className="tour-text-link"
+              disabled={reading}
+              onClick={() => {
+                saveCampaign(defaultCampaign);
+                setError("");
+              }}
+            >
+              Restablecer ejemplo
+            </button>
+          </div>
+          <div
+            className="tour-data-table"
+            tabIndex={0}
+            role="region"
+            aria-label="Tabla de compradores, desplazable horizontalmente"
+          >
+            <table>
+              <caption className="tour-sr-only">
+                Compradores y propiedades de {campaign.fileName}
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Vista previa</th>
+                  {csvColumns.map((column) => (
+                    <th scope="col" key={column.key}>
+                      {column.label}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {campaign.rows.map((row, index) => (
+                  <tr
+                    key={index}
+                    className={index === campaign.selected ? "is-selected" : ""}
+                  >
+                    <td>
+                      <Link
+                        href="/video?mode=showcase"
+                        onClick={() =>
+                          saveCampaign({ ...campaign, selected: index })
+                        }
+                        aria-label={`Ver recorrido de ${row.nombre}`}
+                      >
+                        Ver recorrido ↗
+                      </Link>
+                    </td>
+                    {csvColumns.map(({ key }) => (
+                      <td key={key}>{row[key]}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <div className="tour-next-step">
+          <div>
+            <h2>Los datos le dan forma al mensaje.</h2>
+            <p>Revisa qué aporta cada columna y prepara tu campaña.</p>
+          </div>
+          <Link href="/wizard/columns?mode=showcase" className="tour-button">
+            Revisar mi campaña <span aria-hidden="true">→</span>
+          </Link>
+        </div>
       </section>
     </main>
   );
@@ -115,8 +224,17 @@ function UploadCSVContent() {
 
 export default function UploadCSV() {
   return (
-    <Suspense fallback={<main className="wizard-showcase-shell" />}>
-      <UploadCSVContent />
+    <Suspense
+      fallback={
+        <main className="tour-shell">
+          <FunnelNav step={2} />
+          <p className="tour-container tour-loading">
+            Preparando los datos de tu campaña…
+          </p>
+        </main>
+      }
+    >
+      <CampaignData />
     </Suspense>
   );
 }

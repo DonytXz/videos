@@ -1,126 +1,115 @@
 "use client";
-import { useRouter } from "next/navigation";
-import React from "react";
-import bg from "../../../../public/img/elegir_columnas_fondo_desktop.svg";
-import Image from "next/image";
-import { withBasePath } from "@/lib/basePath";
 
-const Columns = () => {
-  const router = useRouter();
-  let mock = [
-    {
-      name: "Perfil",
-      example: "Editor de Naturaleza",
-    },
-    {
-      name: "Canal",
-      example: "Fauna Viva",
-    },
-    {
-      name: "Correo electrónico",
-      example: "editor@faunaviva.demo",
-    },
-    {
-      name: "Tema",
-      example: "Especial Reptiles",
-    },
-  ];
+import Link from "next/link";
+import FunnelNav from "../../components/property-demo/FunnelNav";
+import {
+  saveCampaign,
+  useCampaign,
+} from "../../components/property-demo/useCampaign";
+import { csvColumns, getScript } from "@/lib/property-demo";
+
+export default function Columns() {
+  const campaign = useCampaign();
+  const buyer = campaign.rows[campaign.selected];
   return (
-    <>
-      <div
-        style={{
-          // backgroundImage: `url(${bg.src}), lightgray -11.817px -0.004px / 106.911% 100.008% no-repeat`,
-          backgroundImage: `url(${bg.src})`,
-          // filter: "gray",
-          // backgroundSize: "cover",
-          // backgroundRepeat: "norepeat",
-          // "lightgray":  "50%",
-          // cover:  "no-repeat"
-          // "mix-blend-mode": "multiply"
-        }}
-        className="flex flex-col max-w-screen w-full min-h-screen h-full pt-20 z-0 bg-center bg-no-repeat bg-origin-border img-fix"
-      >
-        <div className="flex flex-col w-full px-6 lg:px-12 lg:mt-16 xl:px-20 xl:mt-20 box-border">
-          <div className="pt-1 box-border w-full">
-            <h1 className="text-white font-medium text-6xl text-center">
-              Columnas encontradas
-            </h1>
-            <h2 className="text-white mt-4 text-3xl font-light text-center">
-              Asigna{" "}
-              {/* <span className="text-white cursor-pointer font-bold text-3xl"> */}
-              3 columnas al mensaje y 1 como dato de contacto.
-              {/* </span> */}
-            </h2>
-            <div className="flex flex-col mt-10">
-              {mock.map((item: any, index: number) => {
-                return (
-                  <div
-                    key={index}
-                    className={`flex flex-col lg:flex-row px-4 py-6 my-2 rounded-3xl justify-between items-center column_found
-                    ${
-                      ""
-                      // index == 0 ? "bg-black-light" : "bg-black-dark"
-                    }
-                    `}
-                  >
-                    <div className="w-full flex flex-col lg:flex-row ml-0 lg:ml-8 lg:w-fit">
-                      <div className="flex flex-col lg:flex-row items-center w-full">
-                        <div className="upload__buttonInc flex w-12 h-12 rounded-full mr-0 lg:mr-4">
-                          <Image
-                            className="z-50 m-auto"
-                            src={withBasePath("/img/icon/database.svg")}
-                            alt="Hero"
-                            height={16}
-                            width={15}
-                            priority
-                          />
-                        </div>
-                        <div className="flex flex-col">
-                          <p className="text-white text-3xl mt-2 lg:mt-0 font-medium text-center lg:text-left">
-                            {item.name}
-                          </p>
-                          <p className="text-white/60 font-light mt-2 lg:mt-0 text-lg text-center lg:text-left">Ejemplo: {item.example}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="w-full flex flex-col lg:flex-row mr-0 lg:mr-8 items-center lg:w-fit ml-0 lg:ml-auto">
-                      <p className="text-white mt-2 lg:mt-0 mr-0 lg:mr-4 text-2xl font-light text-center lg:text-left">
-                        Selecciona:
-                      </p>
-                      <button
-                        className={`${
-                          index == 2
-                            ? "opacity-30 cursor-default hover:scale-100"
-                            : ""
-                        } max-w-[166px] mt-2 lg:mt-0 mr-0 lg:mr-4 w-full hover:scale-105 purpleGradient_btn rounded-full px-4 py-2 text-white text-lg font-bold`}
-                      >
-                        Personalizar
-                      </button>
-                      <button
-                        className={`${
-                          index !== 2
-                            ? "opacity-30 cursor-default hover:scale-100"
-                            : ""
-                        } min-w-[120px] max-w-[166px] mt-2 lg:mt-0 w-full hover:scale-105 purpleGradient_btn rounded-full px-4 py-2 text-white font-bold text-base`}
-                      >
-                        Contacto
-                      </button>
-                    </div>
-                  </div>
-                );
-              })}
-              <button
-                onClick={() => router.push("/video")}
-                className="mx-auto mb-8 max-w-[336px] w-full hover:scale-105 mt-6 purpleGradient_btn rounded-full px-2 py-3 text-white text-lg font-bold"
-              >
-                Crear vista previa del video →
-              </button>
-            </div>
-          </div>
+    <main className="tour-shell">
+      <FunnelNav step={3} />
+      <section className="tour-container tour-page-heading">
+        <div>
+          <p className="tour-eyebrow">03 / DALE FORMA A TU CAMPAÑA</p>
+          <h1>
+            Un mensaje relevante.
+            <br />
+            <em>Una visita como objetivo.</em>
+          </h1>
         </div>
-      </div>
-    </>
+        <p>
+          La plantilla conecta cada columna con una parte del recorrido. Así se
+          construye cada versión.
+        </p>
+      </section>
+      <section className="tour-container tour-campaign-grid">
+        <div className="tour-mapping">
+          <div className="tour-mapping-heading">
+            <h2>Del dato al mensaje</h2>
+            <span>{csvColumns.length} columnas conectadas</span>
+          </div>
+          {csvColumns.map((column) => (
+            <article key={column.key}>
+              <div>
+                <p className="tour-eyebrow">{column.label}</p>
+                <strong>{buyer[column.key]}</strong>
+              </div>
+              <span aria-hidden="true">→</span>
+              <p>{column.use}</p>
+            </article>
+          ))}
+        </div>
+        <aside className="tour-campaign-summary">
+          <p className="tour-eyebrow">TU CAMPAÑA, DE UN VISTAZO</p>
+          <h2>
+            {campaign.rows.length}{" "}
+            {campaign.rows.length === 1 ? "comprador" : "compradores"}.<br />
+            Un siguiente paso.
+          </h2>
+          <label htmlFor="campaign-buyer">Revisar mensaje de</label>
+          <select
+            id="campaign-buyer"
+            value={campaign.selected}
+            onChange={(event) =>
+              saveCampaign({
+                ...campaign,
+                selected: Number(event.target.value),
+              })
+            }
+          >
+            {campaign.rows.map((row, index) => (
+              <option key={index} value={index}>
+                {row.nombre} · {row.zona}
+              </option>
+            ))}
+          </select>
+          <blockquote>{getScript(buyer)}</blockquote>
+          <div className="tour-summary-cta">
+            <small>CIERRE DEL RECORRIDO</small>
+            <strong>Agendar visita ↗</strong>
+          </div>
+          <Link href="/video?mode=showcase" className="tour-text-link">
+            Volver a la vista previa →
+          </Link>
+        </aside>
+      </section>
+      <section className="tour-container tour-next-step">
+        <div>
+          <h2>
+            {campaign.source === "example"
+              ? "Ahora imagínalo con tus propiedades."
+              : "Tu campaña está lista para revisar."}
+          </h2>
+          <p>
+            {campaign.source === "example"
+              ? "Carga tu CSV y prueba cada mensaje con tus compradores."
+              : "Abre cada versión, revisa el nombre y confirma que la propiedad sea la correcta."}
+          </p>
+          <small>
+            Esta demo permite revisar mensajes. La generación de video y las
+            reservas no están conectadas.
+          </small>
+        </div>
+        <Link
+          href={
+            campaign.source === "example"
+              ? "/wizard/csv?source=upload"
+              : "/video?mode=showcase"
+          }
+          className="tour-button"
+        >
+          {campaign.source === "example"
+            ? "Crear videos con mis propiedades"
+            : "Previsualizar mi campaña"}{" "}
+          <span aria-hidden="true">→</span>
+        </Link>
+      </section>
+    </main>
   );
-};
-
-export default Columns;
+}

@@ -1,156 +1,180 @@
-import Image from "next/image";
 import Link from "next/link";
-import { withBasePath } from "@/lib/basePath";
-
-const steps = [
-  {
-    number: "01",
-    title: "Conecta tus datos",
-    description: "Carga un CSV con perfiles, canales, temas y datos de contacto. Deepia reconoce las columnas automáticamente.",
-  },
-  {
-    number: "02",
-    title: "Define qué cambia",
-    description: "Elige las variables que aparecerán en la introducción, los momentos editoriales y el cierre de cada video.",
-  },
-  {
-    number: "03",
-    title: "Revisa antes de enviar",
-    description: "Previsualiza el resultado, ajusta el ritmo en la línea de tiempo y valida cada versión antes de publicarla.",
-  },
-];
-
-const outcomes = [
-  "Un video único por cada fila de tu base de datos",
-  "Mensajes consistentes con tu canal y línea editorial",
-  "Vista previa y control editorial antes de exportar",
-];
+import PropertyScene from "./components/property-demo/PropertyScene";
+import { sampleBuyers, propertyOptions } from "@/lib/property-demo";
 
 export default function Home() {
   return (
-    <main className="landing-shell text-white">
-      <nav className="landing-nav" aria-label="Navegación principal">
-        <Link href="/" className="flex items-center gap-3" aria-label="Deepia, inicio">
-          <Image src={withBasePath("/img/logo-min.svg")} alt="" width={36} height={36} priority />
-          <span className="text-xl font-semibold tracking-tight">Deepia</span>
+    <main className="tour-shell">
+      <nav className="tour-nav" aria-label="Navegación principal">
+        <Link href="/" className="tour-brand" aria-label="Deepia, inicio">
+          <span aria-hidden="true">d.</span> deepia
         </Link>
-        <div className="flex items-center gap-3 sm:gap-6">
-          <a href="#como-funciona" className="hidden text-sm text-white/70 transition hover:text-white sm:block">
-            Cómo funciona
-          </a>
-          <Link href="/auth/login" className="hidden text-sm text-white/70 transition hover:text-white sm:block">
-            Iniciar sesión
-          </Link>
-          <Link href="/wizard/csv?mode=showcase" className="landing-button landing-button-small">
-            Probar demo
-          </Link>
+        <div className="tour-nav-links">
+          <a href="#como-funciona">Cómo funciona</a>
+          <Link href="/auth/login">Iniciar sesión</Link>
         </div>
+        <Link
+          href="/video?mode=showcase"
+          className="tour-button tour-button-small"
+        >
+          Probar demo <span aria-hidden="true">↗</span>
+        </Link>
       </nav>
-
-      <section className="landing-hero">
-        <div className="landing-hero-copy">
-          <div className="landing-kicker"><span /> Video personalizado a escala</div>
-          <h1>Convierte cada fila de tu base de datos en un video que se siente personal.</h1>
-          <p>
-            Deepia combina una grabación base con los datos de cada prospecto para crear mensajes de venta relevantes,
-            revisables y listos para compartir.
+      <section className="tour-hero tour-container">
+        <div className="tour-hero-copy">
+          <p className="tour-eyebrow">
+            <span className="tour-dot" /> DEEPIA PARA INMOBILIARIAS
           </p>
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <Link href="/wizard/csv?mode=showcase" className="landing-button">
-              Ver el flujo con datos de ejemplo <span aria-hidden="true">→</span>
+          <h1>
+            Una grabación.
+            <br />
+            Un recorrido personal para <em>cada comprador.</em>
+          </h1>
+          <p className="tour-lead">
+            Convierte el interés por una propiedad en el siguiente paso: una
+            visita. Un nombre, un hogar y un mensaje que conectan.
+          </p>
+          <div className="tour-actions">
+            <Link href="/video?mode=showcase" className="tour-button">
+              Ver mi ejemplo <span aria-hidden="true">→</span>
             </Link>
-            <Link href="/auth/login" className="landing-button landing-button-secondary">
-              Ya tengo una cuenta
-            </Link>
+            <a href="#como-funciona" className="tour-text-link">
+              Así funciona
+            </a>
           </div>
-          <p className="landing-no-card">Sin registro · Sin tarjeta · Demo guiada de 2 minutos</p>
+          <p className="tour-muted tour-small">
+            Sin registro · Tres compradores ficticios · Explora a tu ritmo
+          </p>
         </div>
-
-        <div className="landing-product-card" aria-label="Vista previa del producto">
-          <div className="landing-card-topbar">
-            <div className="flex gap-2"><span /><span /><span /></div>
-            <p>Campaña · Renovación Q3</p>
-            <div className="landing-live"><i /> Vista previa</div>
+        <div className="tour-hero-preview">
+          <div className="tour-preview-top">
+            <span>
+              <span className="tour-dot" /> RECORRIDO PARA ANA
+            </span>
+            <span>01 / 03</span>
           </div>
-          <div className="landing-preview-grid">
-            <div className="landing-video-frame">
-              <div className="landing-person-badge">EN</div>
-              <div className="landing-caption">
-                <small>Mensaje generado para</small>
-                <strong>Editor de Naturaleza · Fauna Viva</strong>
-              </div>
-              <div className="landing-play" aria-hidden="true">▶</div>
-            </div>
-            <div className="landing-fields">
-              <p>Variables activas</p>
-              <div><span>Perfil</span><strong>Editor de Naturaleza</strong></div>
-              <div><span>Canal</span><strong>Fauna Viva</strong></div>
-              <div><span>Tema</span><strong>Especial Reptiles</strong></div>
-              <div><span>Contacto</span><strong>editor@faunaviva.demo</strong></div>
-            </div>
-          </div>
-          <div className="landing-timeline">
-            <div><span style={{ width: "24%" }}>Saludo</span><span style={{ width: "38%" }}>Propuesta</span><span style={{ width: "28%" }}>Cierre</span></div>
-            <i />
+          <Link
+            href="/video?mode=showcase"
+            className="tour-hero-art"
+            aria-label="Abrir la demo de recorridos personalizados"
+          >
+            <PropertyScene />
+            <span className="tour-art-label">ROMA NORTE · 2 RECÁMARAS</span>
+            <span className="tour-play-circle" aria-hidden="true">
+              ▶
+            </span>
+            <span className="tour-hero-caption">
+              <small>UN HOGAR PARA TU SIGUIENTE CAPÍTULO</small>
+              <strong>
+                Hola, Ana.
+                <br />
+                Conoce tu próximo espacio.
+              </strong>
+            </span>
+          </Link>
+          <div className="tour-preview-bottom">
+            <span>Departamento Jacaranda</span>
+            <span>Vista previa ilustrada · 24 s</span>
           </div>
         </div>
       </section>
-
-      <section className="landing-proof" aria-label="Beneficios principales">
-        <p>De una grabación base a una conversación relevante con cada prospecto.</p>
+      <section
+        className="tour-proof tour-container"
+        aria-label="Qué puedes probar"
+      >
+        <p>
+          Primero, imagina el resultado.
+          <br />
+          <strong>Después, hazlo tuyo.</strong>
+        </p>
         <div>
-          <span><strong>1 CSV</strong> como fuente de verdad</span>
-          <span><strong>Vista previa</strong> antes de publicar</span>
-          <span><strong>Escala humana</strong> sin regrabar</span>
+          <strong>01</strong>
+          <span>Mira un recorrido</span>
+        </div>
+        <div>
+          <strong>03</strong>
+          <span>Compradores distintos</span>
+        </div>
+        <div>
+          <strong>Tu toque</strong>
+          <span>Edita y compara al instante</span>
         </div>
       </section>
-
-      <section id="como-funciona" className="landing-section">
-        <div className="landing-section-heading">
+      <section id="como-funciona" className="tour-section tour-container">
+        <div className="tour-section-heading">
           <div>
-            <p className="landing-eyebrow">Del dato al video</p>
-            <h2>Personalizar no debería significar empezar de cero.</h2>
+            <p className="tour-eyebrow">MISMA IDEA. DISTINTAS HISTORIAS.</p>
+            <h2>
+              Cada búsqueda merece
+              <br />
+              su propio recorrido.
+            </h2>
           </div>
-          <p>Configura una vez la estructura del mensaje. Deepia aplica tus variables y mantiene el control creativo en tus manos.</p>
+          <p>
+            Prueba cómo cambian el saludo, la propiedad y el beneficio
+            destacado. Todo empieza con lo que le importa a cada persona.
+          </p>
         </div>
-        <div className="landing-steps">
-          {steps.map((step) => (
-            <article key={step.number}>
-              <span>{step.number}</span>
-              <h3>{step.title}</h3>
-              <p>{step.description}</p>
+        <div className="tour-buyer-stories">
+          {sampleBuyers.map((buyer, index) => (
+            <article key={buyer.nombre}>
+              <span className="tour-story-number">0{index + 1}</span>
+              <p className="tour-eyebrow">{buyer.zona}</p>
+              <h3>{propertyOptions[index].profile}</h3>
+              <p>
+                {buyer.nombre} busca {buyer.interes.replaceAll("tu ", "su ")}.
+                Su recorrido destaca {buyer.propiedad} y sus {buyer.recamaras}{" "}
+                recámaras.
+              </p>
             </article>
           ))}
         </div>
       </section>
-
-      <section className="landing-outcome">
+      <section className="tour-invitation tour-container">
         <div>
-          <p className="landing-eyebrow">Una demo que sí puedes recorrer</p>
-          <h2>Mira el resultado antes de conectar tus propios datos.</h2>
-          <p className="landing-outcome-copy">
-            Usa nuestra campaña de ejemplo, revisa cómo asignamos cada columna y abre una vista previa editable. No necesitas credenciales.
+          <p className="tour-eyebrow">DEL EJEMPLO A TU CAMPAÑA</p>
+          <h2>
+            El resultado primero.
+            <br />
+            Los datos, cuando estés listo.
+          </h2>
+          <p>
+            Mira el recorrido, cambia de comprador y personaliza un detalle.
+            Después descubre cómo cada fila de tu CSV se convierte en una
+            versión.
           </p>
-          <ul>
-            {outcomes.map((outcome) => <li key={outcome}><span>✓</span>{outcome}</li>)}
-          </ul>
-          <Link href="/wizard/csv?mode=showcase" className="landing-button">
-            Abrir campaña de ejemplo <span aria-hidden="true">→</span>
+          <Link href="/video?mode=showcase" className="tour-button">
+            Explorar el recorrido <span aria-hidden="true">→</span>
           </Link>
         </div>
-        <div className="landing-dataset-card">
-          <div className="landing-dataset-title"><span>deepia_prospectos_demo.csv</span><strong>4 registros</strong></div>
-          <div className="landing-table-row landing-table-head"><span>Perfil</span><span>Canal</span><span>Tema</span></div>
-          <div className="landing-table-row"><span>Editor</span><span>Fauna Viva</span><span>Reptiles</span></div>
-          <div className="landing-table-row"><span>Productor</span><span>Mundo Salvaje</span><span>Depredadores</span></div>
-          <div className="landing-table-row"><span>Curadora</span><span>Archivo Animal</span><span>Vida silvestre</span></div>
-          <div className="landing-dataset-status"><i /> Datos listos para personalizar</div>
-        </div>
+        <ol>
+          <li>
+            <span>1</span>
+            <div>
+              <strong>Mira y compara</strong>
+              <p>Tres personas. Tres maneras de presentar un hogar.</p>
+            </div>
+          </li>
+          <li>
+            <span>2</span>
+            <div>
+              <strong>Dale tu toque</strong>
+              <p>Cambia el nombre o la propiedad y revisa el mensaje.</p>
+            </div>
+          </li>
+          <li>
+            <span>3</span>
+            <div>
+              <strong>Conecta tus datos</strong>
+              <p>Usa la plantilla o carga tu CSV para probar tu campaña.</p>
+            </div>
+          </li>
+        </ol>
       </section>
-
-      <footer className="landing-footer">
-        <div><strong>Deepia</strong><span>Video personalizado, sin perder el toque humano.</span></div>
-        <Link href="/wizard/csv?mode=showcase">Probar la demo →</Link>
+      <footer className="tour-footer tour-container">
+        <span className="tour-brand">deepia</span>
+        <p>Mensajes personales. Visitas con propósito.</p>
+        <span>Demo con inmuebles ficticios</span>
       </footer>
     </main>
   );
